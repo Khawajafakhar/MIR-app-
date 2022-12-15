@@ -1,7 +1,8 @@
 class Dimens {
 
+  Dimens._();
   //for all screens
-  static const double horizontalPadding = 20.0;
+  static const double horizontalPadding = 30.0;
   static const double verticalPadding = 20.0;
 
   // Vertical spacing constants
@@ -9,6 +10,7 @@ class Dimens {
   static const double verticalSpaceMedium = 20.0;
   static const double verticalSpaceLarge = 40.0;
   static const double verticalSpaceXL = 50.0;
+  static const double verticalSpaceXXL = 70.0;
 
   // Horizontal spacing constants
   static const double horizontalSpaceSmall = 10.0;
@@ -22,6 +24,7 @@ class Dimens {
   static const double buttonTextSizeSmall = 14.0;
   static const double buttonTextSizeMedium = 16.0;
   static const double buttonTextSizeLarge = 18.0;
+  static const double buttonRadius = 5.0;
 
   //TextField
   static const double inputBoarderWidth = 1.0;
@@ -42,7 +45,9 @@ class Dimens {
 
   //TextField
   static const double textFieldSuffixWidth = 80.0;
-  static const double textFieldPrefixWidth = 30.0;
+  static const double textFieldPrefixWidth = 10.0;
+  static const double textFieldPrefixHeight = 10.0;
+
 
  
 }

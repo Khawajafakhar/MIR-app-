@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class TextWidget extends StatelessWidget {
@@ -6,22 +7,54 @@ class TextWidget extends StatelessWidget {
     required this.text,
     this.fontSize,
     this.color,
-    this.fontWeight
+    this.fontWeight,
+    this.isRich = false,
+    this.secondText,
+    this.secondTextColor,
+    this.onClicked,
   });
   final String text;
   final double? fontSize;
   final Color? color;
   final FontWeight? fontWeight;
+  final bool isRich;
+  final String? secondText;
+  final Color? secondTextColor;
+  final void Function()? onClicked;
 
   @override
   Widget build(BuildContext context) {
-    return Text(
-      text,
-      style: TextStyle(
-        fontSize: fontSize,
-        color: color,
-        fontWeight: fontWeight,
-      ),
-    );
+    return isRich
+        ? RichText(
+            // textAlign: TextAlign.center,
+            text: TextSpan(
+                text: text,
+                style: TextStyle(
+                  color: color,
+                  fontSize: fontSize,
+                  fontWeight: fontWeight,
+                ),
+                children: <TextSpan>[
+                TextSpan(
+                  text: secondText,
+                  style: TextStyle(
+                    color: secondTextColor,
+                    fontSize: fontSize,
+                    fontWeight: fontWeight,
+                  ),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      onClicked!();
+                    },
+                )
+              ]))
+        : Text(
+            text,
+            style: TextStyle(
+              fontSize: fontSize,
+              color: color,
+              fontWeight: fontWeight,
+            ),
+          );
   }
 }

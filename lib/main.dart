@@ -5,6 +5,7 @@ import './constants/app_strings.dart';
 import './ui/screens/authentication/signin.dart';
 import './constants/app_theme.dart';
 import './constants/colors.dart';
+import './routes/routes.dart';
 
 void main() {
    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
@@ -23,7 +24,8 @@ class MyApp extends StatelessWidget {
       title: AppStrings.textAppTitle,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.getTheme(),
-      home:const SigninScreen(),
+      onGenerateRoute: Routes.generateRoutes,
+      home: SigninScreen(),
     );
   }
 }
