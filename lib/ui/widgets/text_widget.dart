@@ -1,11 +1,12 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:mir_app/constants/dimens.dart';
 
 class TextWidget extends StatelessWidget {
   const TextWidget({
     super.key,
     required this.text,
-    this.fontSize,
+    this.fontSize=Dimens.textXM,
     this.color,
     this.fontWeight,
     this.isRich = false,

@@ -64,7 +64,10 @@ class SigninScreen extends StatelessWidget {
                             passController: passController,
                           ),
                           UIHelper.verticalSpaceLarge,
-                          const ButtonWidget(txt: AppStrings.textLogin),
+                          ButtonWidget(
+                            txt: AppStrings.textLogin,
+                            onTap: onClickedLogin,
+                          ),
                           UIHelper.verticalSpaceXL,
                           TextWidget(
                               isRich: true,
@@ -86,5 +89,9 @@ class SigninScreen extends StatelessWidget {
 
   void onClickedRegister() {
     Navigator.pushReplacementNamed(ctx, Routes.signUp);
+  }
+
+  void onClickedLogin() {
+    Navigator.pushReplacementNamed(ctx, Routes.home);
   }
 }

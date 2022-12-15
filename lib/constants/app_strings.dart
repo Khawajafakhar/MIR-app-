@@ -3,7 +3,7 @@ class AppStrings{
   //app title
   static const String textAppTitle = "My Incident Report";
 
-  //auth screens strings
+  //auth screens constant
   static const String textLogin = "Login";
   static const String textHintLoginEmail = "Email / Mobile";
   static const String textHintSignUpEmail = "Email";
@@ -14,5 +14,14 @@ class AppStrings{
   static const String textFullName = "Full Name";
   static const String textMobile = "Mobile";
   static const String textAlreadyHaveaccount = "Already have an account? ";
+
+  //home screen text
+  static const String textHome = "Home";
+  static const String textVoiceRecorder = "Voice Recorder";
+  static const String textStatements = "Statements";
+  static const String textMedia = "Media";
+  static const String textIncidentReport = "My Incident Report";
+  static const String textIncidentReportFolder = "Incident Report Folder";
+
   
 }
