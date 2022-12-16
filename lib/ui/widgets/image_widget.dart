@@ -6,17 +6,19 @@ class ImageWidget extends StatelessWidget {
     required this.imagePath,
     this.height,
     this.width,
+    this.boxFit=BoxFit.contain
   });
 
   final String imagePath;
   final double? height;
   final double? width;
+  final BoxFit boxFit;
 
   @override
   Widget build(BuildContext context) {
     return Image.asset(
       imagePath,
-      fit: BoxFit.contain,
+      fit: boxFit,
       height: height,
       width: width,
     );

@@ -6,13 +6,14 @@ class TextWidget extends StatelessWidget {
   const TextWidget({
     super.key,
     required this.text,
-    this.fontSize=Dimens.textXM,
+    this.fontSize=Dimens.textMedium,
     this.color,
     this.fontWeight,
     this.isRich = false,
     this.secondText,
     this.secondTextColor,
     this.onClicked,
+    this.textAlign,
   });
   final String text;
   final double? fontSize;
@@ -22,6 +23,7 @@ class TextWidget extends StatelessWidget {
   final String? secondText;
   final Color? secondTextColor;
   final void Function()? onClicked;
+  final TextAlign? textAlign;
 
   @override
   Widget build(BuildContext context) {
@@ -51,6 +53,7 @@ class TextWidget extends StatelessWidget {
               ]))
         : Text(
             text,
+            textAlign: textAlign,
             style: TextStyle(
               fontSize: fontSize,
               color: color,

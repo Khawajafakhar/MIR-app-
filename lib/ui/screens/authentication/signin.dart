@@ -75,6 +75,7 @@ class SigninScreen extends StatelessWidget {
                               color: AppColors.colorWhite,
                               secondText: AppStrings.textRegister,
                               secondTextColor: AppColors.colorYellow,
+                              fontSize: Dimens.textRegular,
                               onClicked: onClickedRegister)
                         ],
                       )),

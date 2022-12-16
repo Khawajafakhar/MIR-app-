@@ -1,9 +1,14 @@
 class Dimens {
 
   Dimens._();
-  //for all screens
+  //for auth screens
   static const double horizontalPadding = 30.0;
   static const double verticalPadding = 20.0;
+
+  //for home screen
+  static const double horizontalPaddingHome = 15.0;
+  static const double verticalPaddingHome = 20.0;
+  static const double stackTextPositioned = 25.0;
 
   // Vertical spacing constants
   static const double verticalSpaceSmall = 10.0;
@@ -48,6 +53,8 @@ class Dimens {
   static const double textFieldPrefixWidth = 10.0;
   static const double textFieldPrefixHeight = 10.0;
 
-
+ //sized box
+  static const double sizedBoxHeight = 70;
+  static const double sizedBoxWidth = 190;
  
 }

@@ -92,6 +92,7 @@ class SignUpScreen extends StatelessWidget {
                               color: AppColors.colorWhite,
                               secondText: AppStrings.textLogin,
                               secondTextColor: AppColors.colorYellow,
+                              fontSize: Dimens.textRegular,
                               onClicked: onClickedRegister)
                         ],
                       )),
