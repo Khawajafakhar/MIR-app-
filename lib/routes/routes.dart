@@ -3,11 +3,14 @@ import 'package:flutter/material.dart';
 import '../ui/screens/authentication/signin.dart';
 import '../ui/screens/authentication/signup.dart';
 import '../ui/screens/home/home_screen.dart';
+import '../ui/screens/authentication/forgot_password.dart';
 
 class Routes {
   static const String signIn = "/signin";
   static const String signUp = "/signup";
   static const String home = "/home";
+  static const String forgotPassword = "/forgotPassword";
+
 
   static MaterialPageRoute generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
@@ -17,6 +20,8 @@ class Routes {
         return generateRoute(routeSettings.name!, SignUpScreen());
       case home:
         return generateRoute(routeSettings.name!, const HomeScreen());
+        case forgotPassword:
+        return generateRoute(routeSettings.name!, ForgotPasswordScreen());
       default:
         return generateRoute(
           routeSettings.name!,

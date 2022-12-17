@@ -8,13 +8,11 @@ import '../../widgets/text_widget.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/dimens.dart';
 import '../../widgets/textfields/textfield_widget.dart';
-import '../../widgets/textfields/passwordfield_widget.dart';
 import '../../widgets/buttons/button_widget.dart';
 import '../../../routes/routes.dart';
-import '../../widgets/buttons/text_button_widget.dart';
 
-class SigninScreen extends StatelessWidget {
-  SigninScreen({super.key});
+class ForgotPasswordScreen extends StatelessWidget {
+  ForgotPasswordScreen({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -39,13 +37,14 @@ class SigninScreen extends StatelessWidget {
                 const Center(
                     child: ImageWidget(imagePath: AppAssets.imageLogo)),
                 UIHelper.verticalSpace(Dimens.verticalSpaceXXL),
-                const TextWidget(
-                  text: AppStrings.textLogin,
-                  color: AppColors.colorYellow,
-                  fontWeight: FontWeight.bold,
-                  fontSize: Dimens.textXL,
-                ),
-                UIHelper.verticalSpaceMedium,
+               const TextWidget(
+                 text: AppStrings.textResetPassword,
+                 color: AppColors.colorYellow,
+                 fontWeight: FontWeight.bold,
+                 fontSize: Dimens.textLarge,
+                 textAlign: TextAlign.center,
+               ),
+                UIHelper.verticalSpaceLarge,
                 Padding(
                   padding: const EdgeInsets.symmetric(
                       horizontal: Dimens.horizontalPadding),
@@ -60,24 +59,10 @@ class SigninScreen extends StatelessWidget {
                                 imagePath: AppAssets.iconEmail),
                             hint: AppStrings.textHintLoginEmail,
                           ),
-                          UIHelper.verticalSpaceMedium,
-                          PasswordFieldWidget(
-                            passController: passController,
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButtonwidget(
-                              onPressed: onClickedForgot,
-                                textWidget: const TextWidget(
-                              text: AppStrings.textForgotPassword,
-                              color: AppColors.colorYellow,
-                              fontSize: Dimens.textSM,
-                            )),
-                          ),
-                          UIHelper.verticalSpaceSmall,
+                          UIHelper.verticalSpaceLarge,                      
                           ButtonWidget(
-                            txt: AppStrings.textLogin,
-                            onTap: onClickedLogin,
+                            txt: AppStrings.textReset,
+                            onTap: (){},
                           ),
                           UIHelper.verticalSpaceXL,
                           TextWidget(
@@ -98,16 +83,7 @@ class SigninScreen extends StatelessWidget {
       ),
     );
   }
-
-  void onClickedRegister() {
+  void onClickedRegister(){
     Navigator.pushReplacementNamed(ctx, Routes.signUp);
   }
-
-  void onClickedLogin() {
-    Navigator.pushReplacementNamed(ctx, Routes.home);
   }
-
-  void onClickedForgot() {
-    Navigator.pushReplacementNamed(ctx, Routes.forgotPassword);
-  }
-}

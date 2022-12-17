@@ -1,5 +1,4 @@
-class AppStrings{
-
+class AppStrings {
   //app title
   static const String textAppTitle = "My Incident Report";
 
@@ -8,6 +7,9 @@ class AppStrings{
   static const String textHintLoginEmail = "Email / Mobile";
   static const String textHintSignUpEmail = "Email";
   static const String textHintPassword = "Password";
+  static const String textForgotPassword = "Forgot Password?";
+  static const String textResetPassword = "Enter email to reset password";
+  static const String textReset = "Reset";
   static const String textDontHaveAccount = "Don't have an account? ";
   static const String textRegister = "Register";
   static const String textCreateAccount = "Create an Account";
@@ -22,6 +24,4 @@ class AppStrings{
   static const String textMedia = "Media";
   static const String textIncidentReport = "My Incident Report";
   static const String textIncidentReportFolder = "Incident Report Folder";
-
-  
 }
