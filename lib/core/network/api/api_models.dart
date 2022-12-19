@@ -10,15 +10,15 @@ class Apimodels {
   static const String forgotPasswordModel = "forgot password mode";
   static const String errorModel = "error model";
 
-  static dynamic getmodelObjects({required String modelname,required dynamic json}){
-    switch(modelname){
+  static dynamic getModelObject({required String modelName,required dynamic json}){
+    switch(modelName){
       case signInModel:
       return SignIn.fromJson(json);
       case signUpModel:
       return SignUp.fromJson(json);
       case forgotPasswordModel:
       return ForgotPassword.fromJson(json);
-      case errorModel :
+      case errorModel:
       return Error.fromJson(json);
     }
   }

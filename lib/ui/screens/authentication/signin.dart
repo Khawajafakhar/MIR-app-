@@ -104,9 +104,9 @@ class SigninScreen extends StatelessWidget {
     );
   }
 
-  void onClickedForgot() {
+  void onClickedForgot() =>
     Navigator.pushNamed(ctx, Routes.forgotPassword);
-  }
+  
 
   void onClickedLogin() {
     if (_formKey.currentState!.validate()) {

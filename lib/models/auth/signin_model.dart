@@ -1,5 +1,5 @@
 class SignIn {
-   int id;
+  int id;
   String email;
   String? createdAt;
   String? updatedAt;
