@@ -37,7 +37,7 @@ class DioExceptions implements Exception {
           dioErr.response!.statusCode,
           dioErr.message,
         );
-        showToast(message);
+        showToast(message.toString());
 
         break;
 
