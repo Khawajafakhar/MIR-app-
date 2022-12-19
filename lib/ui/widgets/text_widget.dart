@@ -29,7 +29,6 @@ class TextWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return isRich
         ? RichText(
-            // textAlign: TextAlign.center,
             text: TextSpan(
                 text: text,
                 style: TextStyle(

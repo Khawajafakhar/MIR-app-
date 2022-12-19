@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import '../../widgets/image_widget.dart';
 import '../../../constants/assets.dart';
 import '../../util/ui_helper.dart';
-import '../../../constants/app_strings.dart';
+import '../../../constants/app_constants.dart';
 import '../../widgets/text_widget.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/dimens.dart';
 import '../../widgets/textfields/textfield_widget.dart';
 import '../../widgets/buttons/button_widget.dart';
 import '../../../routes/routes.dart';
+import '../../../ui/util/ui/validation_helper.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
@@ -38,7 +39,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                     child: ImageWidget(imagePath: AppAssets.imageLogo)),
                 UIHelper.verticalSpace(Dimens.verticalSpaceXXL),
                const TextWidget(
-                 text: AppStrings.textResetPassword,
+                 text: AppConstants.textResetPassword,
                  color: AppColors.colorYellow,
                  fontWeight: FontWeight.bold,
                  fontSize: Dimens.textLarge,
@@ -55,21 +56,22 @@ class ForgotPasswordScreen extends StatelessWidget {
                           TextFieldWidget(
                             controller: emailController,
                             keyBoardType: TextInputType.emailAddress,
+                            validator: (value) => ValidationHelper.validateEmail(value),
                             prefix: const ImageWidget(
                                 imagePath: AppAssets.iconEmail),
-                            hint: AppStrings.textHintLoginEmail,
+                            hint: AppConstants.textHintLoginEmail,
                           ),
                           UIHelper.verticalSpaceLarge,                      
                           ButtonWidget(
-                            txt: AppStrings.textReset,
+                            txt: AppConstants.textReset,
                             onTap: (){},
                           ),
                           UIHelper.verticalSpaceXL,
                           TextWidget(
                               isRich: true,
-                              text: AppStrings.textDontHaveAccount,
+                              text: AppConstants.textDontHaveAccount,
                               color: AppColors.colorWhite,
-                              secondText: AppStrings.textRegister,
+                              secondText: AppConstants.textRegister,
                               secondTextColor: AppColors.colorYellow,
                               fontSize: Dimens.textRegular,
                               onClicked: onClickedRegister)

@@ -1,15 +1,20 @@
 import 'package:flutter/material.dart';
 
 import './textfield_widget.dart';
-import '../../../constants/app_strings.dart';
+import '../../../constants/app_constants.dart';
 import '../../../constants/assets.dart';
 import './../image_widget.dart';
 import '../../../constants/colors.dart';
 
 class PasswordFieldWidget extends StatefulWidget {
-  const PasswordFieldWidget({super.key, required this.passController});
+  const PasswordFieldWidget({
+    super.key,
+    required this.passController,
+    this.validator,
+  });
 
   final TextEditingController passController;
+  final String? Function(String?)? validator;
 
   @override
   State<PasswordFieldWidget> createState() => _PasswordFieldWidgetState();
@@ -22,9 +27,10 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
     return TextFieldWidget(
       controller: widget.passController,
       isObsecure: isObsecure,
+      validator: widget.validator,
       textInputAction: TextInputAction.done,
       keyBoardType: TextInputType.visiblePassword,
-      hint: AppStrings.textHintPassword,
+      hint: AppConstants.textHintPassword,
       prefix: const ImageWidget(imagePath: AppAssets.iconPass),
       suffix: InkWell(
         onTap: () {

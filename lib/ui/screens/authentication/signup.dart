@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../widgets/image_widget.dart';
 import '../../../constants/assets.dart';
 import '../../util/ui_helper.dart';
-import '../../../constants/app_strings.dart';
+import '../../../constants/app_constants.dart';
 import '../../widgets/text_widget.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/dimens.dart';
@@ -11,6 +11,7 @@ import '../../widgets/textfields/textfield_widget.dart';
 import '../../widgets/textfields/passwordfield_widget.dart';
 import '../../widgets/buttons/button_widget.dart';
 import '../../../routes/routes.dart';
+import '../../../ui/util/ui/validation_helper.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
@@ -43,7 +44,7 @@ class SignUpScreen extends StatelessWidget {
                     child: ImageWidget(imagePath: AppAssets.imageLogo)),
                 UIHelper.verticalSpaceLarge,
                 const TextWidget(
-                  text: AppStrings.textCreateAccount,
+                  text: AppConstants.textCreateAccount,
                   color: AppColors.colorYellow,
                   fontWeight: FontWeight.bold,
                   fontSize: Dimens.textXL,
@@ -59,41 +60,52 @@ class SignUpScreen extends StatelessWidget {
                           TextFieldWidget(
                             controller: nameController,
                             keyBoardType: TextInputType.name,
+                            validator: (value) =>
+                                ValidationHelper.validateField(value),
                             prefix: const ImageWidget(
                                 imagePath: AppAssets.iconUser),
-                            hint: AppStrings.textFullName,
+                            hint: AppConstants.textFullName,
                           ),
                           UIHelper.verticalSpaceMedium,
                           TextFieldWidget(
                             controller: emailController,
                             keyBoardType: TextInputType.emailAddress,
+                            validator: (value) =>
+                                ValidationHelper.validateEmail(value),
                             prefix: const ImageWidget(
                                 imagePath: AppAssets.iconEmail),
-                            hint: AppStrings.textHintSignUpEmail,
+                            hint: AppConstants.textHintSignUpEmail,
                           ),
                           UIHelper.verticalSpaceMedium,
                           TextFieldWidget(
                             controller: phoneController,
                             keyBoardType: TextInputType.phone,
+                            validator: (value) =>
+                                ValidationHelper.validatePhone(value),
                             prefix: const ImageWidget(
                                 imagePath: AppAssets.iconPhone),
-                            hint: AppStrings.textMobile,
+                            hint: AppConstants.textMobile,
                           ),
                           UIHelper.verticalSpaceMedium,
                           PasswordFieldWidget(
                             passController: passController,
+                            validator: (value) =>
+                                ValidationHelper.validatePassword(value),
                           ),
                           UIHelper.verticalSpaceLarge,
-                          const ButtonWidget(txt: AppStrings.textRegister),
+                           ButtonWidget(
+                            txt: AppConstants.textRegister,
+                            onTap: onClickedRegister,
+                          ),
                           UIHelper.verticalSpaceXL,
                           TextWidget(
                               isRich: true,
-                              text: AppStrings.textAlreadyHaveaccount,
+                              text: AppConstants.textAlreadyHaveaccount,
                               color: AppColors.colorWhite,
-                              secondText: AppStrings.textLogin,
+                              secondText: AppConstants.textLogin,
                               secondTextColor: AppColors.colorYellow,
                               fontSize: Dimens.textRegular,
-                              onClicked: onClickedRegister)
+                              onClicked: onClickedLogin)
                         ],
                       )),
                 )
@@ -105,7 +117,13 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  void onClickedRegister() {
+  void onClickedRegister(){
+    if(_formKey.currentState!.validate()){
+     Navigator.pushReplacementNamed(ctx, Routes.home);
+    }
+  }
+
+  void onClickedLogin() {
     Navigator.pushReplacementNamed(ctx, Routes.signIn);
   }
 }

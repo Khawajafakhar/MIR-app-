@@ -13,6 +13,7 @@ class TextFieldWidget extends StatelessWidget {
     this.isObsecure = false,
     this.textInputAction = TextInputAction.next,
     this.keyBoardType,
+    this.validator
   });
 
   final TextEditingController? controller;
@@ -22,6 +23,7 @@ class TextFieldWidget extends StatelessWidget {
   final bool isObsecure;
   final TextInputAction? textInputAction;
   final TextInputType? keyBoardType;
+  final String? Function(String?)? validator;
 
   @override
   Widget build(BuildContext context) {
@@ -29,10 +31,13 @@ class TextFieldWidget extends StatelessWidget {
       controller: controller,
       obscureText: isObsecure,
       textInputAction: textInputAction,
+      validator: validator,
       keyboardType: keyBoardType,
       cursorColor: AppColors.colorWhite,
       style: const TextStyle(color: AppColors.colorWhite),
       decoration: InputDecoration(
+        errorBorder: errorBorder,
+        errorStyle: const TextStyle(color: AppColors.colorRed),
         hintText: hint,
         hintStyle: TextStyle(
           color: AppColors.colorWhite.withOpacity(0.7),
@@ -60,6 +65,12 @@ class TextFieldWidget extends StatelessWidget {
   UnderlineInputBorder get focusedBorder => const UnderlineInputBorder(
         borderSide: BorderSide(
           color: AppColors.colorWhite,
+        ),
+      );
+
+  UnderlineInputBorder get errorBorder => const UnderlineInputBorder(
+        borderSide: BorderSide(
+          color: AppColors.colorRed,
         ),
       );
 }

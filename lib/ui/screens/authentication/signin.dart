@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import '../../widgets/image_widget.dart';
 import '../../../constants/assets.dart';
 import '../../util/ui_helper.dart';
-import '../../../constants/app_strings.dart';
+import '../../../constants/app_constants.dart';
 import '../../widgets/text_widget.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/dimens.dart';
@@ -12,6 +12,7 @@ import '../../widgets/textfields/passwordfield_widget.dart';
 import '../../widgets/buttons/button_widget.dart';
 import '../../../routes/routes.dart';
 import '../../widgets/buttons/text_button_widget.dart';
+import '../../../ui/util/ui/validation_helper.dart';
 
 class SigninScreen extends StatelessWidget {
   SigninScreen({super.key});
@@ -40,7 +41,7 @@ class SigninScreen extends StatelessWidget {
                     child: ImageWidget(imagePath: AppAssets.imageLogo)),
                 UIHelper.verticalSpace(Dimens.verticalSpaceXXL),
                 const TextWidget(
-                  text: AppStrings.textLogin,
+                  text: AppConstants.textLogin,
                   color: AppColors.colorYellow,
                   fontWeight: FontWeight.bold,
                   fontSize: Dimens.textXL,
@@ -56,35 +57,39 @@ class SigninScreen extends StatelessWidget {
                           TextFieldWidget(
                             controller: emailController,
                             keyBoardType: TextInputType.emailAddress,
+                            validator: (value) =>
+                                ValidationHelper.validateEmail(value),
                             prefix: const ImageWidget(
                                 imagePath: AppAssets.iconEmail),
-                            hint: AppStrings.textHintLoginEmail,
+                            hint: AppConstants.textHintLoginEmail,
                           ),
                           UIHelper.verticalSpaceMedium,
                           PasswordFieldWidget(
                             passController: passController,
+                            validator: (value) =>
+                                ValidationHelper.validatePassword(value),
                           ),
                           Align(
                             alignment: Alignment.centerRight,
                             child: TextButtonwidget(
-                              onPressed: onClickedForgot,
+                                onPressed: onClickedForgot,
                                 textWidget: const TextWidget(
-                              text: AppStrings.textForgotPassword,
-                              color: AppColors.colorYellow,
-                              fontSize: Dimens.textSM,
-                            )),
+                                  text: AppConstants.textForgotPassword,
+                                  color: AppColors.colorYellow,
+                                  fontSize: Dimens.textRegular,
+                                )),
                           ),
                           UIHelper.verticalSpaceSmall,
                           ButtonWidget(
-                            txt: AppStrings.textLogin,
+                            txt: AppConstants.textLogin,
                             onTap: onClickedLogin,
                           ),
                           UIHelper.verticalSpaceXL,
                           TextWidget(
                               isRich: true,
-                              text: AppStrings.textDontHaveAccount,
+                              text: AppConstants.textDontHaveAccount,
                               color: AppColors.colorWhite,
-                              secondText: AppStrings.textRegister,
+                              secondText: AppConstants.textRegister,
                               secondTextColor: AppColors.colorYellow,
                               fontSize: Dimens.textRegular,
                               onClicked: onClickedRegister)
@@ -99,15 +104,17 @@ class SigninScreen extends StatelessWidget {
     );
   }
 
-  void onClickedRegister() {
-    Navigator.pushReplacementNamed(ctx, Routes.signUp);
+  void onClickedForgot() {
+    Navigator.pushNamed(ctx, Routes.forgotPassword);
   }
 
   void onClickedLogin() {
-    Navigator.pushReplacementNamed(ctx, Routes.home);
+    if (_formKey.currentState!.validate()) {
+      Navigator.pushReplacementNamed(ctx, Routes.home);
+    }
   }
 
-  void onClickedForgot() {
-    Navigator.pushReplacementNamed(ctx, Routes.forgotPassword);
+  void onClickedRegister() {
+    Navigator.pushNamed(ctx, Routes.signUp);
   }
 }

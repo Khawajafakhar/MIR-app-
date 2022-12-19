@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import './constants/app_strings.dart';
+import 'constants/app_constants.dart';
 import './ui/screens/authentication/signin.dart';
 import './constants/app_theme.dart';
 import './constants/colors.dart';
@@ -21,7 +21,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: AppStrings.textAppTitle,
+      title: AppConstants.textAppTitle,
       debugShowCheckedModeBanner: false,
       theme: AppTheme.getTheme(),
       onGenerateRoute: Routes.generateRoutes,
