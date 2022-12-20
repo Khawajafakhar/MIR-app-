@@ -13,12 +13,15 @@ class ToastMessage {
     dynamic toastLength = Toast.LENGTH_LONG,
   }) {
     Color? color;
+    Color? textColor;
     if (type == TOAST_TYPE.success) {
       color = AppColors.colorGreen;
+      textColor = AppColors.backgroundColor;
     }
 
     if (type == TOAST_TYPE.error) {
       color = AppColors.colorRed;
+      textColor = AppColors.colorWhite;
     }
 
     Fluttertoast.showToast(
@@ -27,7 +30,7 @@ class ToastMessage {
       gravity: ToastGravity.BOTTOM,
       timeInSecForIosWeb: 2,
       backgroundColor: color,
-      textColor: Colors.white,
+      textColor: textColor,
       fontSize: 16.0,
     );
   }

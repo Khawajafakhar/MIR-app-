@@ -56,5 +56,8 @@ class Dimens {
  //sized box
   static const double sizedBoxHeight = 70;
   static const double sizedBoxWidth = 190;
+
+  //loading indicator size
+  static const double indicatorSize = 50;
  
 }

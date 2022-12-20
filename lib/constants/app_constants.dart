@@ -1,5 +1,4 @@
 class AppConstants {
-
   AppConstants._();
   //app title
   static const String textAppTitle = "My Incident Report";
@@ -22,6 +21,8 @@ class AppConstants {
   static const String textPasswordLenghthError = "*must contain atleast 8 characters";
   static const String textInvalidEmail = "*invalid Email";
   static const String textInvalidPhone = "*invalid Phone Number";
+  static const String textPassNotMatched = "Password must match";
+  static const String textLoggedIn = "Login successfully";
 
   //home screen constant
   static const String textHome = "Home";
@@ -39,12 +40,9 @@ class AppConstants {
   static const String textCheckNetwork = "check your Network connetion";
   static const String textUndefinedError = "Error is undefined";
   static const String textSomethingWentWrong = "Something went wrong";
-    static const String textInvalidData = "Invalid data";
+  static const String textInvalidData = "Invalid data";
   static const String textUnathorized = "Unathorized";
   static const String textErrorForbiden = "Error Forbidden";
   static const String textErrorInternelServer = "Internal server Error";
-    static const String textErrorBadRequest = "Url Not found";
-
-
-
+  static const String textErrorBadRequest = "Url Not found";
 }

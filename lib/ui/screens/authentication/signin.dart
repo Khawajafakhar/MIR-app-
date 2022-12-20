@@ -15,6 +15,7 @@ import '../../../routes/routes.dart';
 import '../../widgets/buttons/text_button_widget.dart';
 import '../../../ui/util/ui/validation_helper.dart';
 import '../../../view_models/auth_viewmodel.dart';
+import '../../widgets/loading_widget.dart';
 
 class SigninScreen extends StatelessWidget {
    SigninScreen({super.key});
@@ -29,7 +30,7 @@ class SigninScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // bool isLoading = context.select<AuthViewModel,bool>((value) => value.getLoading);
+     bool isLoading = context.select<AuthViewModel,bool>((value) => value.getLoading);
     debugPrint("build");
     ctx = context;
     return SafeArea(
@@ -51,58 +52,56 @@ class SigninScreen extends StatelessWidget {
                   fontSize: Dimens.textXL,
                 ),
                 UIHelper.verticalSpaceMedium,
-                Padding(
-                  padding: const EdgeInsets.symmetric(
-                      horizontal: Dimens.horizontalPadding),
-                  child: Form(
-                      key: _formKey,
-                      child: Column(
-                        children: [
-                          TextFieldWidget(
-                            controller: emailController,
-                            keyBoardType: TextInputType.emailAddress,
-                            validator: (value) =>
-                                ValidationHelper.validateEmail(value),
-                            prefix: const ImageWidget(
-                                imagePath: AppAssets.iconEmail),
-                            hint: AppConstants.textHintLoginEmail,
-                          ),
-                          UIHelper.verticalSpaceMedium,
-                          PasswordFieldWidget(
-                            passController: passController,
-                            validator: (value) =>
-                                ValidationHelper.validatePassword(value),
-                          ),
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: TextButtonwidget(
-                                onPressed: onForgotPassword,
-                                textWidget: const TextWidget(
-                                  text: AppConstants.textForgotPassword,
-                                  color: AppColors.colorYellow,
-                                  fontSize: Dimens.textRegular,
-                                )),
-                          ),
-                          UIHelper.verticalSpaceSmall,
-                          ctx.read<AuthViewModel>().getLoading == true
-                              ? const CircularProgressIndicator(
-                                  color: AppColors.colorWhite,
-                                )
-                              : ButtonWidget(
-                                  txt: AppConstants.textLogin,
-                                  onTap: onLogin,
-                                ),
-                          UIHelper.verticalSpaceXL,
-                          TextWidget(
-                              isRich: true,
-                              text: AppConstants.textDontHaveAccount,
-                              color: AppColors.colorWhite,
-                              secondText: AppConstants.textRegister,
-                              secondTextColor: AppColors.colorYellow,
-                              fontSize: Dimens.textRegular,
-                              onClicked: onRegister)
-                        ],
-                      )),
+                SizedBox(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        horizontal: Dimens.horizontalPadding),
+                    child:  Form(
+                        key: _formKey,
+                        child: Column(
+                          children: [
+                            TextFieldWidget(
+                              controller: emailController,
+                              keyBoardType: TextInputType.emailAddress,
+                              validator: (value) =>
+                                  ValidationHelper.validateEmail(value),
+                              prefix: const ImageWidget(
+                                  imagePath: AppAssets.iconEmail),
+                              hint: AppConstants.textHintLoginEmail,
+                            ),
+                            UIHelper.verticalSpaceMedium,
+                            PasswordFieldWidget(
+                              passController: passController,
+                              validator: (value) =>
+                                  ValidationHelper.validatePassword(value),
+                            ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: TextButtonwidget(
+                                  onPressed: onForgotPassword,
+                                  textWidget: const TextWidget(
+                                    text: AppConstants.textForgotPassword,
+                                    color: AppColors.colorYellow,
+                                    fontSize: Dimens.textRegular,
+                                  )),
+                            ),
+                            UIHelper.verticalSpaceSmall,
+                            isLoading ? const LoadingWidget() : ButtonWidget(
+                                    txt: AppConstants.textLogin,
+                                    onTap: onLogin,
+                                  ),
+                            UIHelper.verticalSpaceXL,
+                            TextWidget(
+                                isRich: true,
+                                text: AppConstants.textDontHaveAccount,
+                                color: AppColors.colorWhite,
+                                secondText: AppConstants.textRegister,
+                                secondTextColor: AppColors.colorYellow,
+                                fontSize: Dimens.textRegular,
+                                onClicked: onRegister)
+                          ],
+                        )),
+                  ),
                 )
               ],
             ),

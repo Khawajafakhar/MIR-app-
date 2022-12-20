@@ -22,6 +22,9 @@ class SignUpScreen extends StatelessWidget {
 
   final TextEditingController passController = TextEditingController();
 
+    final TextEditingController conformPassController = TextEditingController();
+
+
   final TextEditingController nameController = TextEditingController();
 
   final TextEditingController phoneController = TextEditingController();
@@ -89,6 +92,12 @@ class SignUpScreen extends StatelessWidget {
                           UIHelper.verticalSpaceMedium,
                           PasswordFieldWidget(
                             passController: passController,
+                            validator: (value) =>
+                                ValidationHelper.validatePassword(value),
+                          ),
+                          UIHelper.verticalSpaceMedium,
+                          PasswordFieldWidget(
+                            passController: conformPassController,
                             validator: (value) =>
                                 ValidationHelper.validatePassword(value),
                           ),
