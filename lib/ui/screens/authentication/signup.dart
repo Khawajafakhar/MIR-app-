@@ -22,8 +22,7 @@ class SignUpScreen extends StatelessWidget {
 
   final TextEditingController passController = TextEditingController();
 
-    final TextEditingController conformPassController = TextEditingController();
-
+  final TextEditingController conformPassController = TextEditingController();
 
   final TextEditingController nameController = TextEditingController();
 
@@ -42,10 +41,10 @@ class SignUpScreen extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                UIHelper.verticalSpaceMedium,
+                UIHelper.verticalSpaceSmall,
                 const Center(
                     child: ImageWidget(imagePath: AppAssets.imageLogo)),
-                UIHelper.verticalSpaceLarge,
+                UIHelper.verticalSpaceSmall,
                 const TextWidget(
                   text: AppConstants.textCreateAccount,
                   color: AppColors.colorYellow,
@@ -92,17 +91,22 @@ class SignUpScreen extends StatelessWidget {
                           UIHelper.verticalSpaceMedium,
                           PasswordFieldWidget(
                             passController: passController,
+                            hint: AppConstants.textHintPassword,
                             validator: (value) =>
                                 ValidationHelper.validatePassword(value),
                           ),
                           UIHelper.verticalSpaceMedium,
                           PasswordFieldWidget(
                             passController: conformPassController,
+                            hint: AppConstants.textHintConformPassword,
                             validator: (value) =>
-                                ValidationHelper.validatePassword(value),
+                                ValidationHelper.validateConformPassword(
+                              value,
+                              passController.text,
+                            ),
                           ),
-                          UIHelper.verticalSpaceLarge,
-                           ButtonWidget(
+                          UIHelper.verticalSpaceMedium,
+                          ButtonWidget(
                             txt: AppConstants.textRegister,
                             onTap: onRegister,
                           ),
@@ -126,13 +130,11 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  void onRegister(){
-    if(_formKey.currentState!.validate()){
-     Navigator.pushReplacementNamed(ctx, Routes.home);
+  void onRegister() {
+    if (_formKey.currentState!.validate()) {
+      Navigator.pushReplacementNamed(ctx, Routes.home);
     }
   }
 
-  void onLogin() =>
-    Navigator.pushReplacementNamed(ctx, Routes.signIn);
-  
+  void onLogin() => Navigator.pushReplacementNamed(ctx, Routes.signIn);
 }

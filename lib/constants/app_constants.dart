@@ -8,6 +8,7 @@ class AppConstants {
   static const String textHintLoginEmail = "Email / Mobile";
   static const String textHintSignUpEmail = "Email";
   static const String textHintPassword = "Password";
+  static const String textHintConformPassword = "Confirm Password";
   static const String textForgotPassword = "Forgot Password?";
   static const String textResetPassword = "Enter email to reset password";
   static const String textReset = "Reset";
@@ -18,7 +19,8 @@ class AppConstants {
   static const String textMobile = "Mobile";
   static const String textAlreadyHaveaccount = "Already have an account? ";
   static const String textRequired = "*required";
-  static const String textPasswordLenghthError = "*must contain atleast 8 characters";
+  static const String textPasswordLenghthError =
+      "*must contain atleast 8 characters";
   static const String textInvalidEmail = "*invalid Email";
   static const String textInvalidPhone = "*invalid Phone Number";
   static const String textPassNotMatched = "Password must match";
@@ -36,7 +38,8 @@ class AppConstants {
   static const String textCanceledRequest = "Request is canceled";
   static const String textRequestTimeOut = "Request Timeout";
   static const String textSendingTimeOut = "Request sending Timeout";
-  static const String textRecievingTimeOut = "Request is not recieved by the server";
+  static const String textRecievingTimeOut =
+      "Request is not recieved by the server";
   static const String textCheckNetwork = "check your Network connetion";
   static const String textUndefinedError = "Error is undefined";
   static const String textSomethingWentWrong = "Something went wrong";

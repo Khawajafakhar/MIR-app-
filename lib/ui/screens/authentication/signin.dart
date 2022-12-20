@@ -72,6 +72,7 @@ class SigninScreen extends StatelessWidget {
                             UIHelper.verticalSpaceMedium,
                             PasswordFieldWidget(
                               passController: passController,
+                              hint: AppConstants.textHintPassword,
                               validator: (value) =>
                                   ValidationHelper.validatePassword(value),
                             ),
