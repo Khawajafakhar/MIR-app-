@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/image_widget.dart';
 import '../../../constants/assets.dart';
@@ -12,6 +13,8 @@ import '../../widgets/textfields/passwordfield_widget.dart';
 import '../../widgets/buttons/button_widget.dart';
 import '../../../routes/routes.dart';
 import '../../../ui/util/ui/validation_helper.dart';
+import '../../../view_models/auth_viewmodel.dart';
+import '../../widgets/loading_widget.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
@@ -22,7 +25,7 @@ class SignUpScreen extends StatelessWidget {
 
   final TextEditingController passController = TextEditingController();
 
-  final TextEditingController conformPassController = TextEditingController();
+  final TextEditingController confirmPassController = TextEditingController();
 
   final TextEditingController nameController = TextEditingController();
 
@@ -32,6 +35,8 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoading = context.select<AuthViewModel, bool>(
+        (authViewModel) => authViewModel.getLoading);
     ctx = context;
     return SafeArea(
       child: GestureDetector(
@@ -97,7 +102,7 @@ class SignUpScreen extends StatelessWidget {
                           ),
                           UIHelper.verticalSpaceMedium,
                           PasswordFieldWidget(
-                            passController: conformPassController,
+                            passController: confirmPassController,
                             hint: AppConstants.textHintConformPassword,
                             validator: (value) =>
                                 ValidationHelper.validateConformPassword(
@@ -106,10 +111,12 @@ class SignUpScreen extends StatelessWidget {
                             ),
                           ),
                           UIHelper.verticalSpaceMedium,
-                          ButtonWidget(
-                            txt: AppConstants.textRegister,
-                            onTap: onRegister,
-                          ),
+                          isLoading
+                              ? const LoadingWidget()
+                              : ButtonWidget(
+                                  txt: AppConstants.textRegister,
+                                  onTap: onRegister,
+                                ),
                           UIHelper.verticalSpaceXL,
                           TextWidget(
                               isRich: true,
@@ -130,9 +137,16 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  void onRegister() {
+  void onRegister() async {
     if (_formKey.currentState!.validate()) {
-      Navigator.pushReplacementNamed(ctx, Routes.home);
+      await ctx.read<AuthViewModel>().register(
+            email: emailController.text,
+            name: nameController.text,
+            phone: phoneController.text,
+            password: passController.text,
+            confirmPassword: confirmPassController.text,
+            context: ctx,
+          );
     }
   }
 

@@ -18,7 +18,7 @@ import '../../../view_models/auth_viewmodel.dart';
 import '../../widgets/loading_widget.dart';
 
 class SigninScreen extends StatelessWidget {
-   SigninScreen({super.key});
+  SigninScreen({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -30,7 +30,8 @@ class SigninScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-     bool isLoading = context.select<AuthViewModel,bool>((value) => value.getLoading);
+    bool isLoading = context.select<AuthViewModel, bool>(
+        (authViewModel) => authViewModel.getLoading);
     debugPrint("build");
     ctx = context;
     return SafeArea(
@@ -56,7 +57,7 @@ class SigninScreen extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: Dimens.horizontalPadding),
-                    child:  Form(
+                    child: Form(
                         key: _formKey,
                         child: Column(
                           children: [
@@ -87,7 +88,9 @@ class SigninScreen extends StatelessWidget {
                                   )),
                             ),
                             UIHelper.verticalSpaceSmall,
-                            isLoading ? const LoadingWidget() : ButtonWidget(
+                            isLoading
+                                ? const LoadingWidget()
+                                : ButtonWidget(
                                     txt: AppConstants.textLogin,
                                     onTap: onLogin,
                                   ),
@@ -114,10 +117,10 @@ class SigninScreen extends StatelessWidget {
 
   void onForgotPassword() => Navigator.pushNamed(ctx, Routes.forgotPassword);
 
-  void onLogin() async{
+  void onLogin() async {
     if (_formKey.currentState!.validate()) {
       NavigatorState navigate = Navigator.of(ctx);
-    await ctx.read<AuthViewModel>().login(
+      await ctx.read<AuthViewModel>().login(
           email: emailController.text,
           password: passController.text,
           navigate: navigate);

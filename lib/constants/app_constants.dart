@@ -24,7 +24,9 @@ class AppConstants {
   static const String textInvalidEmail = "*invalid Email";
   static const String textInvalidPhone = "*invalid Phone Number";
   static const String textPassNotMatched = "Password must match";
-  static const String textLoggedIn = "Login successfully";
+  static const String textSuccessLogin = "Login successfully";
+  static const String textSuccessRegistered = "Registered successfully";
+
 
   //home screen constant
   static const String textHome = "Home";

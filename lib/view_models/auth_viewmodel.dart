@@ -35,7 +35,7 @@ class AuthViewModel with ChangeNotifier {
     );
     setLoading = false;
     if (user != null) {
-      ToastMessage.show(AppConstants.textLoggedIn, TOAST_TYPE.success);
+      ToastMessage.show(AppConstants.textSuccessLogin, TOAST_TYPE.success);
       navigate.pushReplacementNamed(Routes.home);
     } else {
       debugPrint(null);
@@ -43,6 +43,34 @@ class AuthViewModel with ChangeNotifier {
   }
 
   //register method
- // Future<void> register({}){}
-
+  Future<void> register({
+    required String email,
+    required String name,
+    required dynamic phone,
+    required String password,
+    required String confirmPassword,
+    required BuildContext context,
+  }) async {
+    setLoading = true;
+    NavigatorState navigate = Navigator.of(context);
+    User? user = await ApiService.callPostApi(
+      url: AppUrls.signUp,
+      params: {
+        "user[email]": email,
+        "user[first_name]": name,
+        "user[last_name]": "",
+        "user[phone]": phone,
+        "user[password]": password,
+        "user[password_confirmation]": confirmPassword,
+      },
+      modelName: Apimodels.userModel,
+    );
+    setLoading = false;
+    if (user != null) {
+      ToastMessage.show(AppConstants.textSuccessRegistered, TOAST_TYPE.success);
+      navigate.pushReplacementNamed(Routes.home);
+    } else {
+      debugPrint(null);
+    }
+  }
 }
