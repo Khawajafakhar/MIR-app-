@@ -5,7 +5,7 @@ class Error {
     required this.error,
   });
 
-  factory Error.fromJson(Map<String, dynamic> jsonData) {
+  factory Error.fromJson(dynamic jsonData) {
     return Error(
       error: jsonData["error"],
     );

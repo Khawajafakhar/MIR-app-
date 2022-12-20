@@ -95,7 +95,7 @@ class SignUpScreen extends StatelessWidget {
                           UIHelper.verticalSpaceLarge,
                            ButtonWidget(
                             txt: AppConstants.textRegister,
-                            onTap: onClickedRegister,
+                            onTap: onRegister,
                           ),
                           UIHelper.verticalSpaceXL,
                           TextWidget(
@@ -105,7 +105,7 @@ class SignUpScreen extends StatelessWidget {
                               secondText: AppConstants.textLogin,
                               secondTextColor: AppColors.colorYellow,
                               fontSize: Dimens.textRegular,
-                              onClicked: onClickedLogin)
+                              onClicked: onLogin)
                         ],
                       )),
                 )
@@ -117,13 +117,13 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  void onClickedRegister(){
+  void onRegister(){
     if(_formKey.currentState!.validate()){
      Navigator.pushReplacementNamed(ctx, Routes.home);
     }
   }
 
-  void onClickedLogin() {
+  void onLogin() =>
     Navigator.pushReplacementNamed(ctx, Routes.signIn);
-  }
+  
 }

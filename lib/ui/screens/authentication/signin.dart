@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/image_widget.dart';
 import '../../../constants/assets.dart';
@@ -13,9 +14,10 @@ import '../../widgets/buttons/button_widget.dart';
 import '../../../routes/routes.dart';
 import '../../widgets/buttons/text_button_widget.dart';
 import '../../../ui/util/ui/validation_helper.dart';
+import '../../../view_models/auth_viewmodel.dart';
 
 class SigninScreen extends StatelessWidget {
-  SigninScreen({super.key});
+   SigninScreen({super.key});
 
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -27,6 +29,8 @@ class SigninScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // bool isLoading = context.select<AuthViewModel,bool>((value) => value.getLoading);
+    debugPrint("build");
     ctx = context;
     return SafeArea(
       child: GestureDetector(
@@ -72,7 +76,7 @@ class SigninScreen extends StatelessWidget {
                           Align(
                             alignment: Alignment.centerRight,
                             child: TextButtonwidget(
-                                onPressed: onClickedForgot,
+                                onPressed: onForgotPassword,
                                 textWidget: const TextWidget(
                                   text: AppConstants.textForgotPassword,
                                   color: AppColors.colorYellow,
@@ -80,10 +84,14 @@ class SigninScreen extends StatelessWidget {
                                 )),
                           ),
                           UIHelper.verticalSpaceSmall,
-                          ButtonWidget(
-                            txt: AppConstants.textLogin,
-                            onTap: onClickedLogin,
-                          ),
+                          ctx.read<AuthViewModel>().getLoading == true
+                              ? const CircularProgressIndicator(
+                                  color: AppColors.colorWhite,
+                                )
+                              : ButtonWidget(
+                                  txt: AppConstants.textLogin,
+                                  onTap: onLogin,
+                                ),
                           UIHelper.verticalSpaceXL,
                           TextWidget(
                               isRich: true,
@@ -92,7 +100,7 @@ class SigninScreen extends StatelessWidget {
                               secondText: AppConstants.textRegister,
                               secondTextColor: AppColors.colorYellow,
                               fontSize: Dimens.textRegular,
-                              onClicked: onClickedRegister)
+                              onClicked: onRegister)
                         ],
                       )),
                 )
@@ -104,17 +112,17 @@ class SigninScreen extends StatelessWidget {
     );
   }
 
-  void onClickedForgot() =>
-    Navigator.pushNamed(ctx, Routes.forgotPassword);
-  
+  void onForgotPassword() => Navigator.pushNamed(ctx, Routes.forgotPassword);
 
-  void onClickedLogin() {
+  void onLogin() async{
     if (_formKey.currentState!.validate()) {
-      Navigator.pushReplacementNamed(ctx, Routes.home);
+      NavigatorState navigate = Navigator.of(ctx);
+    await ctx.read<AuthViewModel>().login(
+          email: emailController.text,
+          password: passController.text,
+          navigate: navigate);
     }
   }
 
-  void onClickedRegister() {
-    Navigator.pushNamed(ctx, Routes.signUp);
-  }
+  void onRegister() => Navigator.pushNamed(ctx, Routes.signUp);
 }

@@ -40,7 +40,7 @@ class ApiService {
       if (er.response != null) {
         Error errorResponse = Apimodels.getModelObject(
           modelName: Apimodels.errorModel,
-          json: er.response,
+          json: er.response!.data,
         );
         ToastMessage.show(errorResponse.error, TOAST_TYPE.error);
         return null;

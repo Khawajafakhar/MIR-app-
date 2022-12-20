@@ -38,13 +38,13 @@ class ForgotPasswordScreen extends StatelessWidget {
                 const Center(
                     child: ImageWidget(imagePath: AppAssets.imageLogo)),
                 UIHelper.verticalSpace(Dimens.verticalSpaceXXL),
-               const TextWidget(
-                 text: AppConstants.textResetPassword,
-                 color: AppColors.colorYellow,
-                 fontWeight: FontWeight.bold,
-                 fontSize: Dimens.textLarge,
-                 textAlign: TextAlign.center,
-               ),
+                const TextWidget(
+                  text: AppConstants.textResetPassword,
+                  color: AppColors.colorYellow,
+                  fontWeight: FontWeight.bold,
+                  fontSize: Dimens.textLarge,
+                  textAlign: TextAlign.center,
+                ),
                 UIHelper.verticalSpaceLarge,
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -56,15 +56,16 @@ class ForgotPasswordScreen extends StatelessWidget {
                           TextFieldWidget(
                             controller: emailController,
                             keyBoardType: TextInputType.emailAddress,
-                            validator: (value) => ValidationHelper.validateEmail(value),
+                            validator: (value) =>
+                                ValidationHelper.validateEmail(value),
                             prefix: const ImageWidget(
                                 imagePath: AppAssets.iconEmail),
                             hint: AppConstants.textHintLoginEmail,
                           ),
-                          UIHelper.verticalSpaceLarge,                      
+                          UIHelper.verticalSpaceLarge,
                           ButtonWidget(
                             txt: AppConstants.textReset,
-                            onTap: (){},
+                            onTap: () {},
                           ),
                           UIHelper.verticalSpaceXL,
                           TextWidget(
@@ -74,7 +75,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                               secondText: AppConstants.textRegister,
                               secondTextColor: AppColors.colorYellow,
                               fontSize: Dimens.textRegular,
-                              onClicked: onClickedRegister)
+                              onClicked: onRegister)
                         ],
                       )),
                 )
@@ -85,7 +86,7 @@ class ForgotPasswordScreen extends StatelessWidget {
       ),
     );
   }
-  void onClickedRegister(){
-    Navigator.pushReplacementNamed(ctx, Routes.signUp);
-  }
-  }
+
+  void onRegister() =>
+      Navigator.pushReplacementNamed(ctx, Routes.signUp);
+}

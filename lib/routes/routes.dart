@@ -15,7 +15,7 @@ class Routes {
   static MaterialPageRoute generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case signIn:
-        return generateRoute(routeSettings.name!, SigninScreen());
+        return generateRoute(routeSettings.name!,  SigninScreen());
       case signUp:
         return generateRoute(routeSettings.name!, SignUpScreen());
       case home:
