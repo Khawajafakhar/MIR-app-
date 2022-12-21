@@ -5,7 +5,7 @@ import '../../../models/auth/signup_model.dart';
 import '../../../models/error_model.dart';
 import '../../../models/user/user.dart';
 
-class Apimodels {
+class ApiModels {
   static const String signInModel = "signin model";
   static const String signUpModel = "signup model";
   static const String forgotPasswordModel = "forgot password mode";

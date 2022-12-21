@@ -31,7 +31,7 @@ class AuthViewModel with ChangeNotifier {
         "email": email,
         "password": password,
       },
-      modelName: Apimodels.userModel,
+      modelName: ApiModels.userModel,
     );
     setLoading = false;
     if (user != null) {
@@ -63,7 +63,7 @@ class AuthViewModel with ChangeNotifier {
         "user[password]": password,
         "user[password_confirmation]": confirmPassword,
       },
-      modelName: Apimodels.userModel,
+      modelName: ApiModels.userModel,
     );
     setLoading = false;
     if (user != null) {
