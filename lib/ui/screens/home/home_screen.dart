@@ -11,7 +11,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    debugPrint("home build");
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(

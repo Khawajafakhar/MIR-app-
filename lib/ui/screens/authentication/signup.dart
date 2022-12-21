@@ -37,7 +37,6 @@ class SignUpScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLoading = context.select<AuthViewModel, bool>(
         (authViewModel) => authViewModel.getLoading);
-        debugPrint("signup build");
     ctx = context;
     return SafeArea(
       child: GestureDetector(
