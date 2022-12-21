@@ -32,6 +32,14 @@ class ValidationHelper {
     return null;
   }
 
+  static String? validateConformPassword(String? passOne, String? passTwo){
+    if(passOne != passTwo){
+      return AppConstants.textPassNotMatched;
+    }else{
+      return null;
+    }
+  }
+
   static String? validateField(String? text) {
     if (text == null || text.isEmpty) {
       return AppConstants.textRequired;

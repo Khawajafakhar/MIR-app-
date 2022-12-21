@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/image_widget.dart';
 import '../../../constants/assets.dart';
@@ -12,6 +13,8 @@ import '../../widgets/textfields/passwordfield_widget.dart';
 import '../../widgets/buttons/button_widget.dart';
 import '../../../routes/routes.dart';
 import '../../../ui/util/ui/validation_helper.dart';
+import '../../../view_models/auth_viewmodel.dart';
+import '../../widgets/loading_widget.dart';
 
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
@@ -22,6 +25,8 @@ class SignUpScreen extends StatelessWidget {
 
   final TextEditingController passController = TextEditingController();
 
+  final TextEditingController confirmPassController = TextEditingController();
+
   final TextEditingController nameController = TextEditingController();
 
   final TextEditingController phoneController = TextEditingController();
@@ -30,6 +35,8 @@ class SignUpScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoading = context.select<AuthViewModel, bool>(
+        (authViewModel) => authViewModel.getLoading);
     ctx = context;
     return SafeArea(
       child: GestureDetector(
@@ -39,10 +46,10 @@ class SignUpScreen extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: [
-                UIHelper.verticalSpaceMedium,
+                UIHelper.verticalSpaceSmall,
                 const Center(
                     child: ImageWidget(imagePath: AppAssets.imageLogo)),
-                UIHelper.verticalSpaceLarge,
+                UIHelper.verticalSpaceSmall,
                 const TextWidget(
                   text: AppConstants.textCreateAccount,
                   color: AppColors.colorYellow,
@@ -89,14 +96,27 @@ class SignUpScreen extends StatelessWidget {
                           UIHelper.verticalSpaceMedium,
                           PasswordFieldWidget(
                             passController: passController,
+                            hint: AppConstants.textHintPassword,
                             validator: (value) =>
                                 ValidationHelper.validatePassword(value),
                           ),
-                          UIHelper.verticalSpaceLarge,
-                           ButtonWidget(
-                            txt: AppConstants.textRegister,
-                            onTap: onRegister,
+                          UIHelper.verticalSpaceMedium,
+                          PasswordFieldWidget(
+                            passController: confirmPassController,
+                            hint: AppConstants.textHintConformPassword,
+                            validator: (value) =>
+                                ValidationHelper.validateConformPassword(
+                              value,
+                              passController.text,
+                            ),
                           ),
+                          UIHelper.verticalSpaceMedium,
+                          isLoading
+                              ? const LoadingWidget()
+                              : ButtonWidget(
+                                  txt: AppConstants.textRegister,
+                                  onTap: onRegister,
+                                ),
                           UIHelper.verticalSpaceXL,
                           TextWidget(
                               isRich: true,
@@ -117,13 +137,18 @@ class SignUpScreen extends StatelessWidget {
     );
   }
 
-  void onRegister(){
-    if(_formKey.currentState!.validate()){
-     Navigator.pushReplacementNamed(ctx, Routes.home);
+  void onRegister() async {
+    if (_formKey.currentState!.validate()) {
+      await ctx.read<AuthViewModel>().register(
+            email: emailController.text,
+            name: nameController.text,
+            phone: phoneController.text,
+            password: passController.text,
+            confirmPassword: confirmPassController.text,
+            context: ctx,
+          );
     }
   }
 
-  void onLogin() =>
-    Navigator.pushReplacementNamed(ctx, Routes.signIn);
-  
+  void onLogin() => Navigator.pushReplacementNamed(ctx, Routes.signIn);
 }

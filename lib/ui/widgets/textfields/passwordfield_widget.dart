@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import './textfield_widget.dart';
-import '../../../constants/app_constants.dart';
 import '../../../constants/assets.dart';
 import './../image_widget.dart';
 import '../../../constants/colors.dart';
@@ -11,10 +10,12 @@ class PasswordFieldWidget extends StatefulWidget {
     super.key,
     required this.passController,
     this.validator,
+    this.hint
   });
 
   final TextEditingController passController;
   final String? Function(String?)? validator;
+  final String? hint;
 
   @override
   State<PasswordFieldWidget> createState() => _PasswordFieldWidgetState();
@@ -30,7 +31,7 @@ class _PasswordFieldWidgetState extends State<PasswordFieldWidget> {
       validator: widget.validator,
       textInputAction: TextInputAction.done,
       keyBoardType: TextInputType.visiblePassword,
-      hint: AppConstants.textHintPassword,
+      hint: widget.hint,
       prefix: const ImageWidget(imagePath: AppAssets.iconPass),
       suffix: InkWell(
         onTap: () {
