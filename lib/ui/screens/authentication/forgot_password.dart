@@ -13,6 +13,7 @@ import '../../widgets/buttons/button_widget.dart';
 import '../../../routes/routes.dart';
 import '../../../ui/util/ui/validation_helper.dart';
 import '../../../view_models/auth_viewmodel.dart';
+import '../../widgets/loading_widget.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
@@ -27,6 +28,9 @@ class ForgotPasswordScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    bool isLoading = context.select<AuthViewModel, bool>(
+        (authViewModel) => authViewModel.getLoading);
+    debugPrint("forgot build");
     ctx = context;
     return SafeArea(
       child: GestureDetector(
@@ -65,10 +69,12 @@ class ForgotPasswordScreen extends StatelessWidget {
                             hint: AppConstants.textHintLoginEmail,
                           ),
                           UIHelper.verticalSpaceLarge,
-                          ButtonWidget(
-                            txt: AppConstants.textReset,
-                            onTap: onReset,
-                          ),
+                          isLoading
+                              ? const LoadingWidget()
+                              : ButtonWidget(
+                                  txt: AppConstants.textReset,
+                                  onTap: onReset,
+                                ),
                           UIHelper.verticalSpaceXL,
                           TextWidget(
                               isRich: true,

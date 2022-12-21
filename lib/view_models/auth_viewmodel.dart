@@ -23,9 +23,10 @@ class AuthViewModel with ChangeNotifier {
   Future<void> login({
     required String email,
     required String password,
-    required NavigatorState navigate,
+    required BuildContext context,
   }) async {
     setLoading = true;
+    NavigatorState navigate = Navigator.of(context);
     User? user = await ApiService.callPostApi(
       url: ApiUrls.signIn,
       params: {
@@ -34,15 +35,16 @@ class AuthViewModel with ChangeNotifier {
       },
       modelName: ApiModels.userModel,
     );
-    setLoading = false;
     if (user != null) {
       ToastMessage.show(
         AppConstants.textSuccessLogin,
         TOAST_TYPE.success,
       );
       navigate.pushReplacementNamed(Routes.home);
+      setLoading = false;
     } else {
       debugPrint(null);
+      setLoading = false;
     }
   }
 
@@ -75,7 +77,10 @@ class AuthViewModel with ChangeNotifier {
         AppConstants.textSuccessRegistered,
         TOAST_TYPE.success,
       );
-      navigate.pushReplacementNamed(Routes.home);
+      navigate.pushNamedAndRemoveUntil(
+        Routes.home,
+        (route) => false,
+      );
     } else {
       debugPrint(null);
     }

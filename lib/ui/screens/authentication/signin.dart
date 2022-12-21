@@ -32,7 +32,7 @@ class SigninScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     bool isLoading = context.select<AuthViewModel, bool>(
         (authViewModel) => authViewModel.getLoading);
-    debugPrint("build");
+    debugPrint("signin build");
     ctx = context;
     return SafeArea(
       child: GestureDetector(
@@ -119,11 +119,10 @@ class SigninScreen extends StatelessWidget {
 
   void onLogin() async {
     if (_formKey.currentState!.validate()) {
-      NavigatorState navigate = Navigator.of(ctx);
       await ctx.read<AuthViewModel>().login(
           email: emailController.text,
           password: passController.text,
-          navigate: navigate);
+          context: ctx);
     }
   }
 
