@@ -6,21 +6,22 @@ import '../ui/screens/home/home_screen.dart';
 import '../ui/screens/authentication/forgot_password.dart';
 
 class Routes {
+  Routes._();
+
   static const String signIn = "/signin";
   static const String signUp = "/signup";
   static const String home = "/home";
   static const String forgotPassword = "/forgotPassword";
 
-
   static MaterialPageRoute generateRoutes(RouteSettings routeSettings) {
     switch (routeSettings.name) {
       case signIn:
-        return generateRoute(routeSettings.name!,  SigninScreen());
+        return generateRoute(routeSettings.name!, SigninScreen());
       case signUp:
         return generateRoute(routeSettings.name!, SignUpScreen());
       case home:
         return generateRoute(routeSettings.name!, const HomeScreen());
-        case forgotPassword:
+      case forgotPassword:
         return generateRoute(routeSettings.name!, ForgotPasswordScreen());
       default:
         return generateRoute(

@@ -1,5 +1,5 @@
-class AppUrls {
-  AppUrls._();
+class ApiUrls {
+  ApiUrls._();
 
   static const String baseUrl = "http://54.85.209.60/api/v1/";
   static const String signUp = "users/";

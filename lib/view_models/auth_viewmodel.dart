@@ -7,6 +7,7 @@ import '../core/network/api/api_models.dart';
 import '../routes/routes.dart';
 import '../constants/app_constants.dart';
 import '../ui/util/toast/toast.dart';
+import '../models/auth/forgotpassword_model.dart';
 
 class AuthViewModel with ChangeNotifier {
   bool _loading = false;
@@ -18,7 +19,7 @@ class AuthViewModel with ChangeNotifier {
     notifyListeners();
   }
 
-  //login method
+  //login method to call api
   Future<void> login({
     required String email,
     required String password,
@@ -26,7 +27,7 @@ class AuthViewModel with ChangeNotifier {
   }) async {
     setLoading = true;
     User? user = await ApiService.callPostApi(
-      url: AppUrls.signIn,
+      url: ApiUrls.signIn,
       params: {
         "email": email,
         "password": password,
@@ -35,14 +36,17 @@ class AuthViewModel with ChangeNotifier {
     );
     setLoading = false;
     if (user != null) {
-      ToastMessage.show(AppConstants.textSuccessLogin, TOAST_TYPE.success);
+      ToastMessage.show(
+        AppConstants.textSuccessLogin,
+        TOAST_TYPE.success,
+      );
       navigate.pushReplacementNamed(Routes.home);
     } else {
       debugPrint(null);
     }
   }
 
-  //register method
+  //register method to call api
   Future<void> register({
     required String email,
     required String name,
@@ -54,7 +58,7 @@ class AuthViewModel with ChangeNotifier {
     setLoading = true;
     NavigatorState navigate = Navigator.of(context);
     User? user = await ApiService.callPostApi(
-      url: AppUrls.signUp,
+      url: ApiUrls.signUp,
       params: {
         "user[email]": email,
         "user[first_name]": name,
@@ -67,10 +71,36 @@ class AuthViewModel with ChangeNotifier {
     );
     setLoading = false;
     if (user != null) {
-      ToastMessage.show(AppConstants.textSuccessRegistered, TOAST_TYPE.success);
+      ToastMessage.show(
+        AppConstants.textSuccessRegistered,
+        TOAST_TYPE.success,
+      );
       navigate.pushReplacementNamed(Routes.home);
     } else {
       debugPrint(null);
+    }
+  }
+
+  //forgot password method to call api
+  Future<void> forgotPassword({
+    required String email,
+    required BuildContext context,
+  }) async {
+    setLoading = true;
+    NavigatorState navigate = Navigator.of(context);
+    ForgotPasswordResponse? response = await ApiService.callPutApi(
+        url: ApiUrls.forgotPassword,
+        modelName: ApiModels.forgotPasswordModel,
+        params: {
+          "email": email,
+        });
+    if (response != null) {
+      ToastMessage.show(response.success, TOAST_TYPE.success);
+      navigate.pushReplacementNamed(Routes.signIn);
+      setLoading = false;
+    } else {
+      debugPrint(null);
+      setLoading = false;
     }
   }
 }

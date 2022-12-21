@@ -19,7 +19,7 @@ class ApiService {
   }) async {
     try {
       BaseOptions options = BaseOptions(
-        baseUrl: AppUrls.baseUrl,
+        baseUrl: ApiUrls.baseUrl,
         contentType: 'application/json',
         headers: {},
       );
@@ -68,7 +68,7 @@ class ApiService {
   }) async {
     try {
       BaseOptions options = BaseOptions(
-          baseUrl: AppUrls.baseUrl,
+          baseUrl: ApiUrls.baseUrl,
           contentType: 'application/json,',
           headers: {});
       Dio dio = Dio(options);

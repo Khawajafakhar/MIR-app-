@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import '../../widgets/image_widget.dart';
 import '../../../constants/assets.dart';
@@ -11,6 +12,7 @@ import '../../widgets/textfields/textfield_widget.dart';
 import '../../widgets/buttons/button_widget.dart';
 import '../../../routes/routes.dart';
 import '../../../ui/util/ui/validation_helper.dart';
+import '../../../view_models/auth_viewmodel.dart';
 
 class ForgotPasswordScreen extends StatelessWidget {
   ForgotPasswordScreen({super.key});
@@ -65,7 +67,7 @@ class ForgotPasswordScreen extends StatelessWidget {
                           UIHelper.verticalSpaceLarge,
                           ButtonWidget(
                             txt: AppConstants.textReset,
-                            onTap: () {},
+                            onTap: onReset,
                           ),
                           UIHelper.verticalSpaceXL,
                           TextWidget(
@@ -87,6 +89,12 @@ class ForgotPasswordScreen extends StatelessWidget {
     );
   }
 
-  void onRegister() =>
-      Navigator.pushReplacementNamed(ctx, Routes.signUp);
+  void onRegister() => Navigator.pushReplacementNamed(ctx, Routes.signUp);
+
+  void onReset() async {
+    await ctx.read<AuthViewModel>().forgotPassword(
+          email: emailController.text,
+          context: ctx,
+        );
+  }
 }

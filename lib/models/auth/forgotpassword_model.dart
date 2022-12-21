@@ -1,10 +1,10 @@
-class ForgotPassword {
+class ForgotPasswordResponse {
   String success;
 
-  ForgotPassword({required this.success});
+  ForgotPasswordResponse({required this.success});
 
-  factory ForgotPassword.fromJson(Map<String, dynamic> jsonData) {
-    return ForgotPassword(
+  factory ForgotPasswordResponse.fromJson(Map<String, dynamic> jsonData) {
+    return ForgotPasswordResponse(
       success: jsonData["success"],
     );
   }

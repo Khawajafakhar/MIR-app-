@@ -19,7 +19,7 @@ class ApiModels {
       case signUpModel:
       return SignUp.fromJson(json);
       case forgotPasswordModel:
-      return ForgotPassword.fromJson(json);
+      return ForgotPasswordResponse.fromJson(json);
       case errorModel:
       return Error.fromJson(json);
       case userModel:
