@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mir_app/core/sharedpreferences/shared_prefs_helper.dart';
-import 'package:mir_app/ui/util/validation/validaton_utils.dart';
 
+import '../core/sharedpreferences/shared_prefs_helper.dart';
 import '../core/network/api/api_service.dart';
 import '../models/user/user.dart';
 import '../core/network/app_urls.dart';
