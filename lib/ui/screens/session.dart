@@ -12,31 +12,29 @@ class SessionWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  
   @override
   Widget build(BuildContext context) {
-    return  FutureBuilder(
+    return FutureBuilder(
       future: SessionProvider.checkSession(),
-      builder:(context, snapshot) {
-        if(snapshot.connectionState == ConnectionState.waiting){
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const LoadingWidget();
-        }else{
-          return  Builder(
-                builder: (_) {
-                  FlutterNativeSplash.remove();
-                  switch (snapshot.data) {
-                    case LoginStatus.hasLoggedIn:
-                      return const HomeScreen();
-                    case LoginStatus.hasNotLoggedIn:
-                      return SigninScreen();                  
-                    default:
-                      return SigninScreen();
-                  }
-                },
-              );
+        } else {
+          return Builder(
+            builder: (_) {
+              FlutterNativeSplash.remove();
+              switch (snapshot.data) {
+                case LoginStatus.hasLoggedIn:
+                  return const HomeScreen();
+                case LoginStatus.hasNotLoggedIn:
+                  return SigninScreen();
+                default:
+                  return SigninScreen();
+              }
+            },
+          );
         }
       },
     );
-          }
+  }
 }
-   
