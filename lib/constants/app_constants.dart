@@ -50,4 +50,8 @@ class AppConstants {
   static const String textErrorForbiden = "Error Forbidden";
   static const String textErrorInternelServer = "Internal server Error";
   static const String textErrorBadRequest = "Url Not found";
+
+  //drawer text
+    static const String textLogout = "Logout";
+
 }

@@ -5,6 +5,7 @@ import '../../../constants/app_constants.dart';
 import './components/main_button_widget.dart';
 import '../../../constants/assets.dart';
 import '../../../constants/dimens.dart';
+import './components/drawer_widget.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -15,6 +16,7 @@ class HomeScreen extends StatelessWidget {
       onWillPop: () => Future.value(false),
       child: Scaffold(
           appBar: const AppBarWidget(txt: AppConstants.textHome),
+          drawer:  DrawerWidget(),
           body: Column(
             children: const [
               Expanded(
