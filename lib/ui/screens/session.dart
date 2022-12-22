@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_native_splash/flutter_native_splash.dart';
 
 import '../../providers/session_provider.dart';
 import '../widgets/loading_widget.dart';
@@ -21,6 +22,7 @@ class SessionWidget extends StatelessWidget {
           } else {
             return Builder(
               builder: (context) {
+                FlutterNativeSplash.remove();
                 switch (snapshot.data) {
                   case LoginStatus.hasLoggedIn:
                     return const HomeScreen();

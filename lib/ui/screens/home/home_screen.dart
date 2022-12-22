@@ -15,6 +15,7 @@ class HomeScreen extends StatelessWidget {
       onWillPop: () => Future.value(false),
       child: Scaffold(
           appBar: const AppBarWidget(txt: AppConstants.textHome),
+          drawer: Drawer(),
           body: Column(
             children: const [
               Expanded(
