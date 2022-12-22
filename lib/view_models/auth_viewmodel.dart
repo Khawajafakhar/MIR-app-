@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:mir_app/core/sharedpreferences/shared_prefs_helper.dart';
+import 'package:mir_app/ui/util/validation/validaton_utils.dart';
 
 import '../core/network/api/api_service.dart';
 import '../models/user/user.dart';
@@ -8,6 +10,8 @@ import '../routes/routes.dart';
 import '../constants/app_constants.dart';
 import '../ui/util/toast/toast.dart';
 import '../models/auth/forgotpassword_model.dart';
+import '../core/sharedpreferences/constants/prefs_const.dart';
+import '../service/service_locator.dart';
 
 class AuthViewModel with ChangeNotifier {
   bool _loading = false;
@@ -40,6 +44,14 @@ class AuthViewModel with ChangeNotifier {
         AppConstants.textSuccessLogin,
         TOAST_TYPE.success,
       );
+      locator<SharedPreferenceHelper>().saveUser(PrefsConst.user, user);
+      locator<SharedPreferenceHelper>().saveAuthToken(PrefsConst.userAuthToken, user.apiToken);
+      User? userPrefs = locator<SharedPreferenceHelper>().getUser();
+      if (ValidationUtils.isValid(userPrefs)) {
+        debugPrint(userPrefs!.email);
+      } else {
+        debugPrint("there is no fuckin user");
+      }
       navigate.pushReplacementNamed(Routes.home);
       setLoading = false;
     } else {
