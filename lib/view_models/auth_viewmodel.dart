@@ -44,14 +44,14 @@ class AuthViewModel with ChangeNotifier {
         AppConstants.textSuccessLogin,
         TOAST_TYPE.success,
       );
-      locator<SharedPreferenceHelper>().saveUser(PrefsConst.user, user);
-      locator<SharedPreferenceHelper>().saveAuthToken(PrefsConst.userAuthToken, user.apiToken);
-      User? userPrefs = locator<SharedPreferenceHelper>().getUser();
-      if (ValidationUtils.isValid(userPrefs)) {
-        debugPrint(userPrefs!.email);
-      } else {
-        debugPrint("there is no fuckin user");
-      }
+      locator<SharedPreferenceHelper>().saveUser(
+        PrefsConst.user,
+        user,
+      );
+      locator<SharedPreferenceHelper>().saveAuthToken(
+        PrefsConst.userAuthToken,
+        user.apiToken,
+      );
       navigate.pushReplacementNamed(Routes.home);
       setLoading = false;
     } else {
@@ -83,18 +83,27 @@ class AuthViewModel with ChangeNotifier {
       },
       modelName: ApiModels.userModel,
     );
-    setLoading = false;
     if (user != null) {
       ToastMessage.show(
         AppConstants.textSuccessRegistered,
         TOAST_TYPE.success,
       );
+      locator<SharedPreferenceHelper>().saveUser(
+        PrefsConst.user,
+        user,
+      );
+      locator<SharedPreferenceHelper>().saveAuthToken(
+        PrefsConst.userAuthToken,
+        user.apiToken,
+      );
       navigate.pushNamedAndRemoveUntil(
         Routes.home,
         (route) => false,
       );
+      setLoading = false;
     } else {
       debugPrint(null);
+      setLoading = false;
     }
   }
 
