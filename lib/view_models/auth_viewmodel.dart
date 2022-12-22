@@ -128,4 +128,15 @@ class AuthViewModel with ChangeNotifier {
       setLoading = false;
     }
   }
+
+  void logout(BuildContext context) {
+    setLoading =true;
+    locator<SharedPreferenceHelper>().removeUser();
+    locator<SharedPreferenceHelper>().removeAuthToken();
+    Navigator.of(context).pushNamedAndRemoveUntil(
+      Routes.signIn,
+      (route) => false,
+    );
+    setLoading=false;
+  }
 }

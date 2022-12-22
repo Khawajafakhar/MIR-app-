@@ -19,11 +19,11 @@ void main() async {
     statusBarColor: AppColors.backgroundColor, // status bar color
   ));
   await setupLocator();
-  runApp(const MyApp());
+  runApp(const MIRApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class MIRApp extends StatelessWidget {
+  const MIRApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -32,6 +32,7 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => AuthViewModel(),
         ),
+        
       ],
       child: MaterialApp(
           title: AppConstants.textAppTitle,
