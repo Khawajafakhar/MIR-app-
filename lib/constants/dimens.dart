@@ -59,5 +59,11 @@ class Dimens {
 
   //loading indicator size
   static const double indicatorSize = 50;
+
+  //divider thickness
+    static const double dividerSmall = 1;
+  static const double dividerMedium = 2;
+  static const double dividerLarge = 3;
+
  
 }

@@ -3,6 +3,9 @@ class AppConstants {
   //app title
   static const String textAppTitle = "My Incident Report";
 
+  //routes
+  static const String textNoRoute = "No routes defined";
+
   //auth screens constant
   static const String textLogin = "Login";
   static const String textHintLoginEmail = "Email / Mobile";
@@ -53,5 +56,11 @@ class AppConstants {
 
   //drawer text
     static const String textLogout = "Logout";
+
+  //voice recorder screen texts
+  static const String textAudioToText = "Audio Speak to Text";
+
+  //textWidget
+  static const String placeHolderText = "Default text";
 
 }

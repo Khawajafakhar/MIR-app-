@@ -10,6 +10,7 @@ class MainButtonWidet extends StatelessWidget {
     super.key,
     required this.imagePath,
     required this.text,
+    this.onTap,
     this.bottom,
     this.left,
     this.right,
@@ -22,46 +23,50 @@ class MainButtonWidet extends StatelessWidget {
   final double? bottom;
   final double? right;
   final double? left;
+  final void Function()? onTap;
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(
-        right: Dimens.horizontalPaddingHome,
-        left: Dimens.horizontalPaddingHome,
-        bottom: Dimens.verticalPaddingHome,
-      ),
-      child: SizedBox(
-        width: double.infinity,
-        child: Stack(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: ImageWidget(
-                imagePath: imagePath,
-                boxFit: BoxFit.fill,
-              ),
-            ),
-            Positioned(  
-              top: top,
-              bottom: bottom,
-              right: right,
-              left: left,          
-              child: SizedBox(
-                height: Dimens.sizedBoxHeight,
-                width: Dimens.sizedBoxWidth,
-                child: Align(
-                  alignment: Alignment.centerLeft,
-                  child: TextWidget(
-                    text: text,
-                    color: AppColors.colorWhite,
-                    fontWeight: FontWeight.bold,
-                    fontSize: Dimens.textXM,
-                  ),
+    return InkWell(
+      onTap: onTap,
+      child: Padding(
+        padding: const EdgeInsets.only(
+          right: Dimens.horizontalPaddingHome,
+          left: Dimens.horizontalPaddingHome,
+          bottom: Dimens.verticalPaddingHome,
+        ),
+        child: SizedBox(
+          width: double.infinity,
+          child: Stack(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: ImageWidget(
+                  imagePath: imagePath,
+                  boxFit: BoxFit.fill,
                 ),
               ),
-            )
-          ],
+              Positioned(  
+                top: top,
+                bottom: bottom,
+                right: right,
+                left: left,          
+                child: SizedBox(
+                  height: Dimens.sizedBoxHeight,
+                  width: Dimens.sizedBoxWidth,
+                  child: Align(
+                    alignment: Alignment.centerLeft,
+                    child: TextWidget(
+                      text: text,
+                      color: AppColors.colorWhite,
+                      fontWeight: FontWeight.bold,
+                      fontSize: Dimens.textXM,
+                    ),
+                  ),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -3,11 +3,12 @@ import 'package:flutter/material.dart';
 
 import '../../constants/colors.dart';
 import '../../constants/dimens.dart';
+import '../../constants/app_constants.dart';
 
 class TextWidget extends StatelessWidget {
   const TextWidget({
     super.key,
-    required this.text,
+    this.text = AppConstants.placeHolderText,
     this.fontSize=Dimens.textMedium,
     this.color = AppColors.colorWhite,
     this.fontWeight,
