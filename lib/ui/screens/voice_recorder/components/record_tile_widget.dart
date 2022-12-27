@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mir_app/ui/widgets/text_widget.dart';
+
+import '../../../widgets/text_widget.dart';
 
 class RecordTileWidget extends StatelessWidget {
   const RecordTileWidget({

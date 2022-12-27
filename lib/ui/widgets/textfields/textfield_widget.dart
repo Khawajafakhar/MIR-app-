@@ -13,7 +13,9 @@ class TextFieldWidget extends StatelessWidget {
     this.isObsecure = false,
     this.textInputAction = TextInputAction.next,
     this.keyBoardType,
-    this.validator
+    this.validator,
+    this.maxLines = 1,
+    this.isBorder = true,
   });
 
   final TextEditingController? controller;
@@ -24,6 +26,8 @@ class TextFieldWidget extends StatelessWidget {
   final TextInputAction? textInputAction;
   final TextInputType? keyBoardType;
   final String? Function(String?)? validator;
+  final int maxLines;
+  final bool isBorder;
 
   @override
   Widget build(BuildContext context) {
@@ -34,9 +38,10 @@ class TextFieldWidget extends StatelessWidget {
       validator: validator,
       keyboardType: keyBoardType,
       cursorColor: AppColors.colorWhite,
+      maxLines: maxLines,
       style: const TextStyle(color: AppColors.colorWhite),
       decoration: InputDecoration(
-        errorBorder: errorBorder,
+        errorBorder: isBorder ? errorBorder : null,
         errorStyle: const TextStyle(color: AppColors.colorRed),
         hintText: hint,
         hintStyle: TextStyle(
@@ -49,9 +54,15 @@ class TextFieldWidget extends StatelessWidget {
                 child: prefix,
               )
             : null,
-        suffixIcon: suffix ?? const SizedBox(),
-        enabledBorder: enabledBorder,
-        focusedBorder: focusedBorder,
+        suffixIcon: suffix != null
+            ? Container(
+                width: Dimens.textFieldPrefixWidth,
+                alignment: Alignment.center,
+                child: suffix,
+              )
+            : null,
+        enabledBorder: isBorder ? enabledBorder : null,
+        focusedBorder: isBorder ? focusedBorder : null,
       ),
     );
   }
