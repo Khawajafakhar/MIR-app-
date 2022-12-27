@@ -63,4 +63,8 @@ class AppConstants {
   //textWidget
   static const String placeHolderText = "Default text";
 
+  //Text media screen
+  static const String textTextMedia = "Text Media";
+  static const String textWriteHere = "Write here...";
+
 }

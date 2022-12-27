@@ -1,20 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:mir_app/constants/app_constants.dart';
-import 'package:mir_app/constants/assets.dart';
-import 'package:mir_app/constants/colors.dart';
-import 'package:mir_app/constants/dimens.dart';
-import 'package:mir_app/ui/screens/voice_recorder/components/record_tile_widget.dart';
-import 'package:mir_app/ui/widgets/appbar_widget.dart';
-import 'package:mir_app/ui/widgets/divider_widget.dart';
-import 'package:mir_app/ui/widgets/icon_widget.dart';
-import 'package:mir_app/ui/widgets/image_widget.dart';
-import 'package:mir_app/ui/widgets/text_widget.dart';
+
+import '../../../routes/routes.dart';
+import '../../../constants/app_constants.dart';
+import '../../../constants/assets.dart';
+import '../../../constants/colors.dart';
+import '../../../constants/dimens.dart';
+import './components/record_tile_widget.dart';
+import '../../widgets/appbar_widget.dart';
+import '../../widgets/divider_widget.dart';
+import '../../widgets/image_widget.dart';
+import '../../widgets/text_widget.dart';
 
 class VoiceRecorderScreen extends StatelessWidget {
-  const VoiceRecorderScreen({super.key});
+   VoiceRecorderScreen({super.key});
+
+  late BuildContext ctx;
 
   @override
   Widget build(BuildContext context) {
+    ctx = context;
     return Scaffold(
       appBar: const AppBarWidget(),
       body: Column(
@@ -22,11 +26,12 @@ class VoiceRecorderScreen extends StatelessWidget {
         children: [
           Expanded(
               child: Column(
-            children: const [
+            children:  [
               ImageWidget(
                 imagePath: AppAssets.iconCall911,
+                onTap: onCallIcon,
               ),
-              Padding(
+             const Padding(
                 padding: EdgeInsets.symmetric(
                   vertical: Dimens.verticalSpaceMedium,
                 ),
@@ -59,5 +64,8 @@ class VoiceRecorderScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+  void onCallIcon(){
+  Navigator.pushNamed(ctx, Routes.textMedia);
   }
 }
