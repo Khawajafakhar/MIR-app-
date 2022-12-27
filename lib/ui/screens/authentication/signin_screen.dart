@@ -9,7 +9,7 @@ import '../../widgets/text_widget.dart';
 import '../../../constants/colors.dart';
 import '../../../constants/dimens.dart';
 import '../../widgets/textfields/textfield_widget.dart';
-import '../../widgets/textfields/passwordfield_widget.dart';
+import '../../widgets/textfields/password_field_widget.dart';
 import '../../widgets/buttons/button_widget.dart';
 import '../../../routes/routes.dart';
 import '../../widgets/buttons/text_button_widget.dart';

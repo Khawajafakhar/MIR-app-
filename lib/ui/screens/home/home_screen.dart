@@ -5,26 +5,31 @@ import '../../../constants/app_constants.dart';
 import './components/main_button_widget.dart';
 import '../../../constants/assets.dart';
 import '../../../constants/dimens.dart';
+import '../../../routes/routes.dart';
 import './components/drawer_widget.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+   HomeScreen({super.key});
+
+  late BuildContext ctx;
 
   @override
   Widget build(BuildContext context) {
+    ctx = context;
     return WillPopScope(
       onWillPop: () => Future.value(false),
       child: Scaffold(
           appBar: const AppBarWidget(txt: AppConstants.textHome),
           drawer:  DrawerWidget(),
           body: Column(
-            children: const [
+            children:  [
               Expanded(
                   child: MainButtonWidet(
                 imagePath: AppAssets.imageBgVoiceRecoreder,
                 text: AppConstants.textVoiceRecorder,
                 top: Dimens.stackTextPositioned,
                 left: Dimens.stackTextPositioned,
+                onTap: onVoiceRecorder,
               )),
               Expanded(
                   child: MainButtonWidet(
@@ -58,4 +63,8 @@ class HomeScreen extends StatelessWidget {
           )),
     );
   }
+  void onVoiceRecorder(){
+     Navigator.of(ctx).pushNamed(Routes.voiceRecorder);
+  }
+
 }
