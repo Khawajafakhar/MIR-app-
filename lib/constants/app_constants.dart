@@ -66,5 +66,7 @@ class AppConstants {
   //Text media screen
   static const String textTextMedia = "Text Media";
   static const String textWriteHere = "Write here...";
+    static const String textMicCantBeUsed = "Mic cannot be used";
+
 
 }
