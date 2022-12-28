@@ -21,9 +21,22 @@ class TextMediaScreen extends StatefulWidget {
 class _TextMediaScreenState extends State<TextMediaScreen> {
   SpeechToText speechToText = SpeechToText();
 
-  String lastWords = ' ';
+  String lastWords = '';
+
+  bool available = false;
 
   TextEditingController textController = TextEditingController();
+
+  @override
+  void initState() {
+    initSpeechToText();
+    super.initState();
+  }
+
+  void initSpeechToText() async {
+    available = await speechToText.initialize();
+    setState(() {});
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -51,9 +64,9 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
         child: FloatingActionButton(
           backgroundColor: AppColors.colorYellow,
           onPressed:
-              speechToText.isNotListening ? _startSpeech : _stopListening,
+              speechToText.isListening ? _stopListening :_startSpeech,
           child: IconWidget(
-            icon: speechToText.isNotListening ? Icons.mic_off : Icons.mic,
+            icon: speechToText.isListening ? Icons.mic :Icons.mic_off,
           ),
         ),
       ),
@@ -61,9 +74,10 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
   }
 
   Future<void> _startSpeech() async {
-    bool available = await speechToText.initialize();
     if (available) {
-      speechToText.listen(onResult: _onSpeechResult);
+     await speechToText.listen(
+          onResult: _onSpeechResult,
+          partialResults: false);
       setState(() {});
     } else {
       ToastMessage.show(AppConstants.textMicCantBeUsed, TOAST_TYPE.error);
@@ -76,9 +90,9 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
   }
 
   void _onSpeechResult(SpeechRecognitionResult result) {
-    lastWords = result.recognizedWords;
+    lastWords += result.recognizedWords;
     setState(() {
-      textController.text += lastWords;
+      textController.text = lastWords;
     });
   }
 }
