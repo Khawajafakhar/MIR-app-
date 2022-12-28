@@ -90,7 +90,7 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
   }
 
   void _onSpeechResult(SpeechRecognitionResult result) {
-    lastWords += result.recognizedWords;
+    lastWords += " ${result.recognizedWords}";
     setState(() {
       textController.text = lastWords;
     });
