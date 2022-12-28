@@ -1,10 +1,9 @@
 import 'package:avatar_glow/avatar_glow.dart';
 import 'package:flutter/material.dart';
-import 'package:speech_to_text/speech_to_text.dart';
-import 'package:speech_to_text/speech_recognition_result.dart';
+import 'package:provider/provider.dart';
 
+import '../../../providers/speech_to_text_provider.dart';
 import '../../../constants/colors.dart';
-import '../../util/toast/toast.dart';
 import '../../widgets/icon_widget.dart';
 import '../../../constants/app_constants.dart';
 import '../../../constants/dimens.dart';
@@ -19,23 +18,19 @@ class TextMediaScreen extends StatefulWidget {
 }
 
 class _TextMediaScreenState extends State<TextMediaScreen> {
-  SpeechToText speechToText = SpeechToText();
-
-  String lastWords = '';
-
-  bool available = false;
+  late SpeechToTextProvider speechToTextProvider;
 
   TextEditingController textController = TextEditingController();
 
   @override
-  void initState() {
+  void didChangeDependencies() {
     initSpeechToText();
-    super.initState();
+    super.didChangeDependencies();
   }
 
-  void initSpeechToText() async {
-    available = await speechToText.initialize();
-    setState(() {});
+  void initSpeechToText() {
+    speechToTextProvider = context.watch<SpeechToTextProvider>();
+    textController.text = speechToTextProvider.getLastWords;
   }
 
   @override
@@ -59,40 +54,20 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
       ),
       floatingActionButton: AvatarGlow(
         endRadius: 40,
-        animate: speechToText.isListening,
+        animate: speechToTextProvider.getSpeechToText.isListening,
         glowColor: AppColors.colorYellow,
         child: FloatingActionButton(
           backgroundColor: AppColors.colorYellow,
-          onPressed:
-              speechToText.isListening ? _stopListening :_startSpeech,
+          onPressed: speechToTextProvider.getSpeechToText.isListening
+              ? speechToTextProvider.stopListening
+              : speechToTextProvider.startSpeech,
           child: IconWidget(
-            icon: speechToText.isListening ? Icons.mic :Icons.mic_off,
+            icon: speechToTextProvider.getSpeechToText.isListening ? Icons.mic : Icons.mic_off,
           ),
         ),
       ),
     );
   }
 
-  Future<void> _startSpeech() async {
-    if (available) {
-     await speechToText.listen(
-          onResult: _onSpeechResult,
-          partialResults: false);
-      setState(() {});
-    } else {
-      ToastMessage.show(AppConstants.textMicCantBeUsed, TOAST_TYPE.error);
-    }
-  }
-
-  void _stopListening() async {
-    await speechToText.stop();
-    setState(() {});
-  }
-
-  void _onSpeechResult(SpeechRecognitionResult result) {
-    lastWords += " ${result.recognizedWords}";
-    setState(() {
-      textController.text = lastWords;
-    });
-  }
+  
 }

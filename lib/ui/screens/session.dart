@@ -12,7 +12,6 @@ class SessionWidget extends StatelessWidget {
   }) : super(key: key);
 
   @override
-  @override
   Widget build(BuildContext context) {
     return FutureBuilder(
       future: SessionProvider.checkSession(),
@@ -25,7 +24,7 @@ class SessionWidget extends StatelessWidget {
               FlutterNativeSplash.remove();
               switch (snapshot.data) {
                 case LoginStatus.hasLoggedIn:
-                  return  HomeScreen();
+                  return HomeScreen();
                 case LoginStatus.hasNotLoggedIn:
                   return SigninScreen();
                 default:
