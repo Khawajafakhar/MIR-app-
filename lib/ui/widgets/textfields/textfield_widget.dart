@@ -17,6 +17,7 @@ class TextFieldWidget extends StatelessWidget {
     this.maxLines = 1,
     this.isBorder = true,
     this.onChanged,
+    this.onEditingComplete,
   });
 
   final TextEditingController? controller;
@@ -28,6 +29,7 @@ class TextFieldWidget extends StatelessWidget {
   final TextInputType? keyBoardType;
   final String? Function(String?)? validator;
   final void Function(String)? onChanged;
+  final void Function()? onEditingComplete;
   final int maxLines;
   final bool isBorder;
 
@@ -41,6 +43,7 @@ class TextFieldWidget extends StatelessWidget {
       keyboardType: keyBoardType,
       cursorColor: AppColors.colorWhite,
       onChanged: onChanged,
+      onEditingComplete: onEditingComplete,
       maxLines: maxLines,
       style: const TextStyle(color: AppColors.colorWhite),
       decoration: InputDecoration(

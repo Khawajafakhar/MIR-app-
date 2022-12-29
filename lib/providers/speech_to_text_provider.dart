@@ -32,6 +32,15 @@ class SpeechToTextProvider with ChangeNotifier {
     }
   }
 
+  int get getSpeechLength {
+    return _lastWords.length;
+  }
+
+  set setLastWords(String value) {
+    String val = value;
+    _lastWords = "$val ";
+  }
+
   initSpeechToText() async {
     available = await _speechToText.initialize();
   }
@@ -54,19 +63,18 @@ class SpeechToTextProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void _onSpeechResult(SpeechRecognitionResult result) {
+  void _onSpeechResult(SpeechRecognitionResult result) async {
     _lastWords += "${result.recognizedWords} ";
+    await _speechToText.cancel();
     notifyListeners();
   }
 
-  void disposeText(){
+  void disposeText() {
     _lastWords = '';
   }
 
   void onTextRemove(value) {
-    if (!ValidationUtils.isValid(value)) {
-      _lastWords = '';
-      notifyListeners();
-    }
+    _lastWords = '';
+    notifyListeners();
   }
 }

@@ -9,7 +9,6 @@ import '../routes/routes.dart';
 import '../constants/app_constants.dart';
 import '../ui/util/toast/toast.dart';
 import '../models/auth/forgotpassword_model.dart';
-import '../core/sharedpreferences/constants/prefs_const.dart';
 import '../service/service_locator.dart';
 
 class AuthViewModel with ChangeNotifier {

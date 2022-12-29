@@ -7,8 +7,9 @@ import '../../../constants/colors.dart';
 import '../../widgets/icon_widget.dart';
 import '../../../constants/app_constants.dart';
 import '../../../constants/dimens.dart';
-import '../../widgets/appbar_widget.dart';
 import '../../widgets/textfields/textfield_widget.dart';
+import '../../widgets/appbar_widget.dart';
+import '../../../ui/util/validation/validaton_utils.dart';
 
 class TextMediaScreen extends StatefulWidget {
   const TextMediaScreen({super.key});
@@ -24,13 +25,16 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
 
   @override
   void didChangeDependencies() {
-    initSpeechToText();
+    getListener();
     super.didChangeDependencies();
   }
 
-  void initSpeechToText() {
+  void getListener() {
     speechToTextProvider = context.watch<SpeechToTextProvider>();
     textController.text = speechToTextProvider.getLastWords;
+    textController.selection = TextSelection.collapsed(
+      offset: speechToTextProvider.getSpeechLength,
+    );
   }
 
   @override
@@ -59,7 +63,7 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
             maxLines: 100,
             hint: AppConstants.textWriteHere,
             textInputAction: TextInputAction.newline,
-            onChanged: onTextClear,
+            onChanged: onTextChange,
           ),
         ),
       ),
@@ -82,7 +86,15 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
     );
   }
 
-  void onTextClear(value) {
-    speechToTextProvider.onTextRemove(value);
+  void onTextChange(value) {
+    if (ValidationUtils.isValid(value)) {
+      speechToTextProvider.setLastWords = value;
+      debugPrint(value);
+      if (value.length == 1) {
+        setState(() {});
+      }
+    } else {
+      speechToTextProvider.onTextRemove(value);
+    }
   }
 }
