@@ -44,11 +44,9 @@ class AuthViewModel with ChangeNotifier {
         TOAST_TYPE.success,
       );
       locator<SharedPreferenceHelper>().saveUser(
-        PrefsConst.user,
         user,
       );
       locator<SharedPreferenceHelper>().saveAuthToken(
-        PrefsConst.userAuthToken,
         user.apiToken,
       );
       navigate.pushReplacementNamed(Routes.home);
@@ -88,11 +86,9 @@ class AuthViewModel with ChangeNotifier {
         TOAST_TYPE.success,
       );
       locator<SharedPreferenceHelper>().saveUser(
-        PrefsConst.user,
         user,
       );
       locator<SharedPreferenceHelper>().saveAuthToken(
-        PrefsConst.userAuthToken,
         user.apiToken,
       );
       navigate.pushNamedAndRemoveUntil(
@@ -130,13 +126,13 @@ class AuthViewModel with ChangeNotifier {
   }
 
   void logout(BuildContext context) {
-    setLoading =true;
+    setLoading = true;
     locator<SharedPreferenceHelper>().removeUser();
     locator<SharedPreferenceHelper>().removeAuthToken();
     Navigator.of(context).pushNamedAndRemoveUntil(
       Routes.signIn,
       (route) => false,
     );
-    setLoading=false;
+    setLoading = false;
   }
 }
