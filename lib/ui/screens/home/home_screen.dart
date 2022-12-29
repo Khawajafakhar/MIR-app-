@@ -31,28 +31,28 @@ class HomeScreen extends StatelessWidget {
                 left: Dimens.stackTextPositioned,
                 onTap: onVoiceRecorder,
               )),
-              Expanded(
+             const Expanded(
                   child: MainButtonWidet(
                 imagePath: AppAssets.imageBgStatement,
                 text: AppConstants.textStatements,
                 top: Dimens.stackTextPositioned,
                 right: Dimens.stackTextPositioned,
               )),
-              Expanded(
+            const Expanded(
                   child: MainButtonWidet(
                 imagePath: AppAssets.imageBgMedia,
                 text: AppConstants.textMedia,
                 top: Dimens.stackTextPositioned,
                 left: Dimens.stackTextPositioned,
               )),
-              Expanded(
+             const Expanded(
                   child: MainButtonWidet(
                 imagePath: AppAssets.imageBgMyIncident,
                 text: AppConstants.textIncidentReport,
                 top: Dimens.stackTextPositioned,
                 right: Dimens.stackTextPositioned,
               )),
-              Expanded(
+            const Expanded(
                   child: MainButtonWidet(
                 imagePath: AppAssets.imageBgIncidentFolder,
                 text: AppConstants.textIncidentReportFolder,
