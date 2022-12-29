@@ -33,7 +33,6 @@ class SpeechToTextProvider with ChangeNotifier {
 
   initSpeechToText() async {
     available = await _speechToText.initialize();
-    debugPrint(available.toString());
   }
 
   Future<void> startSpeech() async {
@@ -57,5 +56,9 @@ class SpeechToTextProvider with ChangeNotifier {
   void _onSpeechResult(SpeechRecognitionResult result) {
     _lastWords += "${result.recognizedWords} ";
     notifyListeners();
+  }
+
+  void disposeText(){
+    _lastWords = '';
   }
 }

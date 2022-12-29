@@ -34,9 +34,21 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
   }
 
   @override
+  void dispose() {
+    speechToTextProvider.disposeText();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const AppBarWidget(txt: AppConstants.textTextMedia),
+      appBar: AppBarWidget(
+        txt: AppConstants.textTextMedia,
+        isAction: true,
+        btnText: textController.text != '' 
+        ? AppConstants.textSubmit 
+        : null,
+      ),
       body: SizedBox(
         height: double.infinity,
         width: double.infinity,
@@ -62,12 +74,12 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
               ? speechToTextProvider.stopListening
               : speechToTextProvider.startSpeech,
           child: IconWidget(
-            icon: speechToTextProvider.getSpeechToText.isListening ? Icons.mic : Icons.mic_off,
+            icon: speechToTextProvider.getSpeechToText.isListening
+                ? Icons.mic
+                : Icons.mic_off,
           ),
         ),
       ),
     );
   }
-
-  
 }
