@@ -45,9 +45,7 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
       appBar: AppBarWidget(
         txt: AppConstants.textTextMedia,
         isAction: true,
-        btnText: textController.text != '' 
-        ? AppConstants.textSubmit 
-        : null,
+        btnText: textController.text != '' ? AppConstants.textSubmit : null,
       ),
       body: SizedBox(
         height: double.infinity,
@@ -61,6 +59,7 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
             maxLines: 100,
             hint: AppConstants.textWriteHere,
             textInputAction: TextInputAction.newline,
+            onChanged: onTextClear,
           ),
         ),
       ),
@@ -81,5 +80,9 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
         ),
       ),
     );
+  }
+
+  void onTextClear(value) {
+    speechToTextProvider.onTextRemove(value);
   }
 }

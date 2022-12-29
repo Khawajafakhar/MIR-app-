@@ -4,6 +4,7 @@ import 'package:speech_to_text/speech_to_text.dart';
 
 import '../constants/app_constants.dart';
 import '.././ui/util/toast/toast.dart';
+import '../ui/util/validation/validaton_utils.dart';
 
 class SpeechToTextProvider with ChangeNotifier {
   SpeechToTextProvider(this._speechToText);
@@ -60,5 +61,12 @@ class SpeechToTextProvider with ChangeNotifier {
 
   void disposeText(){
     _lastWords = '';
+  }
+
+  void onTextRemove(value) {
+    if (!ValidationUtils.isValid(value)) {
+      _lastWords = '';
+      notifyListeners();
+    }
   }
 }
