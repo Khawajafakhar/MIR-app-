@@ -1,10 +1,11 @@
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 
 import '../constants/app_constants.dart';
 import '.././ui/util/toast/toast.dart';
-import '../ui/util/validation/validaton_utils.dart';
 
 class SpeechToTextProvider with ChangeNotifier {
   SpeechToTextProvider(this._speechToText);
@@ -42,16 +43,36 @@ class SpeechToTextProvider with ChangeNotifier {
   }
 
   initSpeechToText() async {
-    available = await _speechToText.initialize();
+    available = await _speechToText.initialize(
+      onError: (_) => _speechToText.stop(),
+    );
   }
 
   Future<void> startSpeech() async {
     if (available) {
+      Stopwatch stopwatch = Stopwatch();
       await _speechToText.listen(
           onResult: _onSpeechResult,
+          onSoundLevelChange: (_) {
+            if (!_speechToText.hasRecognized) {
+              stopwatch.start();
+              if (stopwatch.elapsed.inSeconds >= 4) {
+                _speechToText.stop();
+                notifyListeners();
+                stopwatch.stop();
+              }
+            }
+          },
           partialResults: false,
-          listenFor: const Duration(seconds: 5),
-          pauseFor: const Duration(seconds: 5));
+          listenMode: ListenMode.deviceDefault,
+          listenFor: const Duration(
+            seconds: 5,
+          ),
+          pauseFor: const Duration(
+            seconds: 5,
+          ),
+          cancelOnError: true);
+
       notifyListeners();
     } else {
       ToastMessage.show(AppConstants.textMicCantBeUsed, TOAST_TYPE.error);
@@ -65,7 +86,6 @@ class SpeechToTextProvider with ChangeNotifier {
 
   void _onSpeechResult(SpeechRecognitionResult result) async {
     _lastWords += "${result.recognizedWords} ";
-    await _speechToText.cancel();
     notifyListeners();
   }
 

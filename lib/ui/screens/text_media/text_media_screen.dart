@@ -89,7 +89,6 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
   void onTextChange(value) {
     if (ValidationUtils.isValid(value)) {
       speechToTextProvider.setLastWords = value;
-      debugPrint(value);
       if (value.length == 1) {
         setState(() {});
       }
