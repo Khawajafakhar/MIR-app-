@@ -5,7 +5,6 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../../ui/util/validation/validaton_utils.dart';
 import '../../models/user/user_model.dart';
 import '../sharedpreferences/constants/prefs_const.dart';
-import '../../models/speech_to_text/text_media_model.dart';
 
 
 class SharedPreferenceHelper {
