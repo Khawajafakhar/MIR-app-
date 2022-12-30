@@ -11,6 +11,7 @@ import '../../widgets/divider_widget.dart';
 import '../../widgets/image_widget.dart';
 import '../../widgets/text_widget.dart';
 
+// ignore: must_be_immutable
 class VoiceRecorderScreen extends StatelessWidget {
    VoiceRecorderScreen({super.key});
 

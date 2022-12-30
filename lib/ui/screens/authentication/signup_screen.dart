@@ -13,9 +13,10 @@ import '../../widgets/textfields/password_field_widget.dart';
 import '../../widgets/buttons/button_widget.dart';
 import '../../../routes/routes.dart';
 import '../../../ui/util/ui/validation_helper.dart';
-import '../../../view_models/auth_viewmodel.dart';
+import '../../../view_models/auth_view_model.dart';
 import '../../widgets/loading_widget.dart';
 
+// ignore: must_be_immutable
 class SignUpScreen extends StatelessWidget {
   SignUpScreen({super.key});
 
