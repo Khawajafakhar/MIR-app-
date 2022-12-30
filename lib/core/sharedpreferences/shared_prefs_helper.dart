@@ -12,12 +12,12 @@ class SharedPreferenceHelper {
 
   SharedPreferenceHelper(this._prefs);
 
-  Future saveUser(String key, User user) async {
-    return await _prefs.setString(key, jsonEncode(user));
+  Future saveUser(User user)  {
+    return  _prefs.setString(PrefsConst.user, jsonEncode(user));
   }
 
-  Future saveAuthToken(String key, String value) {
-    return _prefs.setString(key, value);
+  Future saveAuthToken(String value) {
+    return _prefs.setString(PrefsConst.userAuthToken, value);
   }
 
   Future removeUser(){

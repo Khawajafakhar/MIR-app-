@@ -1,3 +1,5 @@
+import 'dart:core';
+
 import 'package:flutter/material.dart';
 import 'package:speech_to_text/speech_recognition_result.dart';
 import 'package:speech_to_text/speech_to_text.dart';
@@ -31,18 +33,46 @@ class SpeechToTextProvider with ChangeNotifier {
     }
   }
 
+  int get getSpeechLength {
+    return _lastWords.length;
+  }
+
+  set setLastWords(String value) {
+    String val = value;
+    _lastWords = "$val ";
+  }
+
   initSpeechToText() async {
-    available = await _speechToText.initialize();
-    debugPrint(available.toString());
+    available = await _speechToText.initialize(
+      onError: (_) => _speechToText.stop(),
+    );
   }
 
   Future<void> startSpeech() async {
     if (available) {
+      Stopwatch stopwatch = Stopwatch();
       await _speechToText.listen(
           onResult: _onSpeechResult,
+          onSoundLevelChange: (_) {
+            if (!_speechToText.hasRecognized) {
+              stopwatch.start();
+              if (stopwatch.elapsed.inSeconds >= 4) {
+                _speechToText.stop();
+                notifyListeners();
+                stopwatch.stop();
+              }
+            }
+          },
           partialResults: false,
-          listenFor: const Duration(seconds: 5),
-          pauseFor: const Duration(seconds: 5));
+          listenMode: ListenMode.deviceDefault,
+          listenFor: const Duration(
+            seconds: 5,
+          ),
+          pauseFor: const Duration(
+            seconds: 5,
+          ),
+          cancelOnError: true);
+
       notifyListeners();
     } else {
       ToastMessage.show(AppConstants.textMicCantBeUsed, TOAST_TYPE.error);
@@ -54,8 +84,17 @@ class SpeechToTextProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  void _onSpeechResult(SpeechRecognitionResult result) {
+  void _onSpeechResult(SpeechRecognitionResult result) async {
     _lastWords += "${result.recognizedWords} ";
+    notifyListeners();
+  }
+
+  void disposeText() {
+    _lastWords = '';
+  }
+
+  void onTextRemove(value) {
+    _lastWords = '';
     notifyListeners();
   }
 }
