@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_native_splash/flutter_native_splash.dart';
+import 'package:mir_app/models/speech_to_text/text_media_model.dart';
 import 'package:provider/provider.dart';
 import 'package:speech_to_text/speech_to_text.dart';
 import 'package:path_provider/path_provider.dart' as path_provider;
@@ -27,6 +28,7 @@ void main() async {
   ));
   final appDocumentDir = await path_provider.getApplicationDocumentsDirectory();
   Hive.init(appDocumentDir.path);
+  Hive.registerAdapter(TextMediaAdapter());
   SpeechToText speechToText = SpeechToText();
   speechToTextProvider = SpeechToTextProvider(speechToText);
   speechToTextProvider.initSpeechToText();

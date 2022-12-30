@@ -44,7 +44,4 @@ class SharedPreferenceHelper {
     }
   }
 
-  Future saveTextMedia(int userId , TextMedia data){
-    return _prefs.setString(userId.toString(), data.toString());
-  }
 }
