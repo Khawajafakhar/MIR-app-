@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:mir_app/core/sharedpreferences/shared_prefs_helper.dart';
-import 'package:mir_app/service/service_locator.dart';
 
+import '../core/sharedpreferences/shared_prefs_helper.dart';
+import '../service/service_locator.dart';
 import '../models/speech_to_text/text_media_model.dart';
 import '../service/hive_sevices.dart';
 
 class SpeechToTextViewModel with ChangeNotifier {
-  
+
   void submitData(
     TextMedia data,
     BuildContext context,
@@ -19,9 +19,9 @@ class SpeechToTextViewModel with ChangeNotifier {
   }
 
   Future<dynamic> fetchData() async {
-    final boxData = await HiveServices.getBox(
+  final boxData = await HiveServices.getBox(
       key: locator<SharedPreferenceHelper>().getUser()!.id.toString(),
     );
-    return boxData;
+    return Future.value(boxData);
   }
 }
