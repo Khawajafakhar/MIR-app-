@@ -58,7 +58,7 @@ class AppConstants {
     static const String textLogout = "Logout";
 
   //voice recorder screen texts
-  static const String textAudioToText = "Audio Speak to Text";
+  static const String textAudioToText = "Audio Speech to Text";
 
   //textWidget
   static const String placeHolderText = "Default text";
@@ -66,7 +66,7 @@ class AppConstants {
   //Text media screen
   static const String textTextMedia = "Text Media";
   static const String textWriteHere = "Write here...";
-  static const String textMicCantBeUsed = "Mic cannot be used";
+  static const String textMicCantBeUsed = "Please grant microphone permission in settings";
   static const String textSubmit = "Submit";
 
 

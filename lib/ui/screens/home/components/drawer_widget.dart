@@ -5,9 +5,10 @@ import './../../../../constants/colors.dart';
 import '../../../widgets/buttons/text_button_widget.dart';
 import '../../../widgets/text_widget.dart';
 import '../../../../constants/app_constants.dart';
-import '../../../../view_models/auth_viewmodel.dart';
+import '../../../../view_models/auth_view_model.dart';
 import '../../../widgets/loading_widget.dart';
 
+// ignore: must_be_immutable
 class DrawerWidget extends StatelessWidget {
   DrawerWidget({super.key});
   late BuildContext ctx;

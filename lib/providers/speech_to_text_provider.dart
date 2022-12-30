@@ -52,46 +52,46 @@ class SpeechToTextProvider with ChangeNotifier {
     if (available) {
       Stopwatch stopwatch = Stopwatch();
       await _speechToText.listen(
-          onResult: _onSpeechResult,
-          onSoundLevelChange: (_) {
-            if (!_speechToText.hasRecognized) {
-              stopwatch.start();
-              if (stopwatch.elapsed.inSeconds >= 4) {
-                _speechToText.stop();
-                notifyListeners();
-                stopwatch.stop();
-              }
+        onResult: _onSpeechResult,
+        onSoundLevelChange: (_) {
+          if (!_speechToText.hasRecognized) {
+            stopwatch.start();
+            if (stopwatch.elapsed.inSeconds >= 4) {
+              _speechToText.stop();
+              notifyListeners();
+              stopwatch.stop();
             }
-          },
-          partialResults: false,
-          listenMode: ListenMode.deviceDefault,
-          listenFor: const Duration(
-            seconds: 5,
-          ),
-          pauseFor: const Duration(
-            seconds: 5,
-          ),
-          cancelOnError: true);
-
+          }
+        },
+        partialResults: false,
+        listenMode: ListenMode.deviceDefault,
+        listenFor: const Duration(seconds: 5),
+        pauseFor: const Duration(seconds: 5),
+        cancelOnError: true,
+      );
       notifyListeners();
     } else {
       ToastMessage.show(AppConstants.textMicCantBeUsed, TOAST_TYPE.error);
     }
   }
 
+
   void stopListening() async {
     await _speechToText.stop();
     notifyListeners();
   }
 
-  void _onSpeechResult(SpeechRecognitionResult result) async {
+
+  void _onSpeechResult(SpeechRecognitionResult result) {
     _lastWords += "${result.recognizedWords} ";
     notifyListeners();
   }
 
+
   void disposeText() {
     _lastWords = '';
   }
+
 
   void onTextRemove(value) {
     _lastWords = '';
