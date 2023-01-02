@@ -8,6 +8,7 @@ import '../../../constants/dimens.dart';
 import '../../../routes/routes.dart';
 import './components/drawer_widget.dart';
 
+// ignore: must_be_immutable
 class HomeScreen extends StatelessWidget {
    HomeScreen({super.key});
 

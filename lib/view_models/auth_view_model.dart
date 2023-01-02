@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 import '../core/sharedpreferences/shared_prefs_helper.dart';
 import '../core/network/api/api_service.dart';
-import '../models/user/user.dart';
+import '../models/user/user_model.dart';
 import '../core/network/app_urls.dart';
 import '../core/network/api/api_models.dart';
 import '../routes/routes.dart';

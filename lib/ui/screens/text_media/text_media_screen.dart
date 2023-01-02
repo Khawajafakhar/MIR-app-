@@ -10,6 +10,8 @@ import '../../../constants/dimens.dart';
 import '../../widgets/textfields/textfield_widget.dart';
 import '../../widgets/appbar_widget.dart';
 import '../../../ui/util/validation/validaton_utils.dart';
+import '../../../models/speech_to_text/text_media_model.dart';
+import '../../../view_models/speech_to_text_view_model.dart';
 
 class TextMediaScreen extends StatefulWidget {
   const TextMediaScreen({super.key});
@@ -19,6 +21,10 @@ class TextMediaScreen extends StatefulWidget {
 }
 
 class _TextMediaScreenState extends State<TextMediaScreen> {
+  TextMedia textMedia = TextMedia(
+    dateTime: null,
+    discription: null,
+  );
   late SpeechToTextProvider speechToTextProvider;
 
   TextEditingController textController = TextEditingController();
@@ -50,6 +56,7 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
         txt: AppConstants.textTextMedia,
         isAction: true,
         btnText: textController.text != '' ? AppConstants.textSubmit : null,
+        onPressed: onSubmit,
       ),
       body: SizedBox(
         height: double.infinity,
@@ -95,5 +102,16 @@ class _TextMediaScreenState extends State<TextMediaScreen> {
     } else {
       speechToTextProvider.onTextRemove(value);
     }
+  }
+
+  void onSubmit() {
+    textMedia = TextMedia(
+      dateTime: DateTime.now(),
+      discription: textController.text,
+    );
+    context.read<SpeechToTextViewModel>().submitData(
+          textMedia,
+          context,
+        );
   }
 }

@@ -14,9 +14,10 @@ import '../../widgets/buttons/button_widget.dart';
 import '../../../routes/routes.dart';
 import '../../widgets/buttons/text_button_widget.dart';
 import '../../../ui/util/ui/validation_helper.dart';
-import '../../../view_models/auth_viewmodel.dart';
+import '../../../view_models/auth_view_model.dart';
 import '../../widgets/loading_widget.dart';
 
+// ignore: must_be_immutable
 class SigninScreen extends StatelessWidget {
   SigninScreen({super.key});
 

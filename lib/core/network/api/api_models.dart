@@ -3,7 +3,7 @@ import '../../../models/auth/forgotpassword_model.dart';
 import '../../../models/auth/signin_model.dart';
 import '../../../models/auth/signup_model.dart';
 import '../../../models/error_model.dart';
-import '../../../models/user/user.dart';
+import '../../../models/user/user_model.dart';
 
 class ApiModels {
   static const String signInModel = "signin model";

@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../ui/util/validation/validaton_utils.dart';
-import '../../models/user/user.dart';
+import '../../models/user/user_model.dart';
 import '../sharedpreferences/constants/prefs_const.dart';
 
 
@@ -12,6 +12,8 @@ class SharedPreferenceHelper {
 
   SharedPreferenceHelper(this._prefs);
 
+
+//Authentication preferences
   Future saveUser(User user)  {
     return  _prefs.setString(PrefsConst.user, jsonEncode(user));
   }
@@ -40,4 +42,5 @@ class SharedPreferenceHelper {
       return null;
     }
   }
+
 }
