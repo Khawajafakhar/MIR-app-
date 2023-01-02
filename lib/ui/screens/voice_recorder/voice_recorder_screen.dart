@@ -17,7 +17,7 @@ import '../../widgets/icon_widget.dart';
 
 // ignore: must_be_immutable
 class VoiceRecorderScreen extends StatefulWidget {
-  VoiceRecorderScreen({super.key});
+ const VoiceRecorderScreen({super.key});
 
   @override
   State<VoiceRecorderScreen> createState() => _VoiceRecorderScreenState();

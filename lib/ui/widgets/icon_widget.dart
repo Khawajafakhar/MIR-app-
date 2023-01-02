@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import '../../constants/colors.dart';
-import '../../constants/dimens.dart';
 
 class IconWidget extends StatelessWidget {
   const IconWidget({

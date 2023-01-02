@@ -29,7 +29,7 @@ class Routes {
       case forgotPassword:
         return generateRoute(routeSettings.name!, ForgotPasswordScreen());
       case voiceRecorder:
-        return generateRoute(routeSettings.name!,  VoiceRecorderScreen());
+        return generateRoute(routeSettings.name!, const VoiceRecorderScreen());
         case textMedia:
         return generateRoute(routeSettings.name!, const TextMediaScreen());
       default:
