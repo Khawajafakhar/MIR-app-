@@ -1,5 +1,7 @@
 class AppConstants {
   AppConstants._();
+
+  static const String formatDataTime = 'dd MMM yy HH:mm a';
   //app title
   static const String textAppTitle = "My Incident Report";
 

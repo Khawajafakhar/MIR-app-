@@ -13,11 +13,17 @@ import '../../widgets/image_widget.dart';
 import '../../widgets/text_widget.dart';
 import '../../../view_models/speech_to_text_view_model.dart';
 import '../../../ui/widgets/loading_widget.dart';
+import '../../widgets/icon_widget.dart';
 
 // ignore: must_be_immutable
-class VoiceRecorderScreen extends StatelessWidget {
+class VoiceRecorderScreen extends StatefulWidget {
   VoiceRecorderScreen({super.key});
 
+  @override
+  State<VoiceRecorderScreen> createState() => _VoiceRecorderScreenState();
+}
+
+class _VoiceRecorderScreenState extends State<VoiceRecorderScreen> {
   late BuildContext ctx;
 
   @override
@@ -58,13 +64,24 @@ class VoiceRecorderScreen extends StatelessWidget {
                   builder: (context, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const LoadingWidget();
-                    } else if (snapshot.data == null) {
-                      return const SizedBox();
+                    } else if (snapshot.data.isEmpty) {
+                      return SizedBox(
+                        child: Center(
+                          child: IconWidget(
+                            icon: Icons.add_circle_outline_outlined,
+                            onTap: onAdd,
+                            size: Dimens.iconLarge,
+                          ),
+                        ),
+                      );
                     } else {
+                      var data = snapshot.data.reversed.toList();
                       return ListView.separated(
-                          itemCount: snapshot.data!.length,
-                          itemBuilder: (context, index) =>
-                              const RecordTileWidget(),
+                          itemCount: data.length,
+                          itemBuilder: (context, index) => RecordTileWidget(
+                                dateTime: data[index].dateTime,
+                                discription: data[index].discription,
+                              ),
                           separatorBuilder: (context, index) => Padding(
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: Dimens.horizontalSpaceMedium,
@@ -81,6 +98,18 @@ class VoiceRecorderScreen extends StatelessWidget {
   }
 
   void onCallIcon() {
-    Navigator.pushNamed(ctx, Routes.textMedia);
+    Navigator.pushNamed(ctx, Routes.textMedia).then((value) {
+      if (value == true) {
+        setState(() {});
+      }
+    });
+  }
+
+  void onAdd() {
+    Navigator.pushNamed(ctx, Routes.textMedia).then((value) {
+      if (value == true) {
+        setState(() {});
+      }
+    });
   }
 }

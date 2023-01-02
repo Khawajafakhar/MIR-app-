@@ -45,6 +45,11 @@ class Dimens {
   static const double textSmall = 14.0;
   static const double textXS = 12.0;
 
+  //icon size
+  static const double iconSmall = 30;
+  static const double iconMedium = 40;
+  static const double iconLarge = 50;
+
   //Progress bar
   static const double progressBarHeight = 20.0;
 
@@ -61,7 +66,7 @@ class Dimens {
   static const double indicatorSize = 50;
 
   //divider thickness
-    static const double dividerSmall = 1;
+  static const double dividerSmall = 1;
   static const double dividerMedium = 2;
   static const double dividerLarge = 3;
 

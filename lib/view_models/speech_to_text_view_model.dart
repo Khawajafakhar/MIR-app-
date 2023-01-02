@@ -15,13 +15,13 @@ class SpeechToTextViewModel with ChangeNotifier {
       locator<SharedPreferenceHelper>().getUser()!.id.toString(),
       data,
     );
-    Navigator.pop(context);
+    Navigator.pop(context,true);
   }
 
   Future<dynamic> fetchData() async {
   final boxData = await HiveServices.getBox(
       key: locator<SharedPreferenceHelper>().getUser()!.id.toString(),
     );
-    return Future.value(boxData);
+    return Future.value(boxData.toList());
   }
 }
